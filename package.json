@@ -1,0 +1,22 @@
+{
+  "name": "raura",
+  "version": "1.0.0",
+  "description": "Proyecto de Fin de Grado (DAM) - Pablo Frías Campos\r ## ANTEPROYECTO\r Aquí podrás encontrar la información necesaria de mi Anteproyecto, redactado antes del comienzo del desarrollo del mismo:\r https://persistent-warrior-970.notion.site/ANTEPROYECTO-a7adfb3b75084f8089006569990d9961?pvs=4",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.1",
+    "mysql2": "^3.9.2",
+    "sequelize": "^6.37.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
