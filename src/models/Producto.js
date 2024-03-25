@@ -7,7 +7,7 @@ const Producto = db.define('Producto', {
     allowNull: false
   },
   Categoria: {
-    type: DataTypes.STRING
+    type: DataTypes.ENUM("COMIDA","BEBIDA")
   },
   Disponible: {
     type: DataTypes.BOOLEAN,
@@ -19,6 +19,6 @@ const Producto = db.define('Producto', {
   Descripcion: {
     type: DataTypes.TEXT
   }
-});
+}, {timestamps: false});
 
 module.exports = Producto;

@@ -1,16 +1,24 @@
 const router = require('express').Router();
 
 const Productos = require('../models/Producto')
+const Mesas = require('../models/Mesa');
+const ListaProductosMesa = require('../models/ListaProductosMesa');
+const ListaProductosCuenta = require('../models/ListaProductosCuenta');
+const Cuentas = require('../models/Cuenta');
 
-router.get('/', (req,res) => {
-  const productos = Productos.findAll()
-  res.json(productos)
+// Codigo ejemplo para include (Cruce de tablas)
+router.get('/', async (req,res) => {
+  const cuenta = await Cuentas.findAll({
+    where: {id: 1},
+    include: Productos
+  });
+  res.json(cuenta)
 
 })
 
 router.get('/:id', async (req,res) => {
   const id = req.params.id
-  const producto = Productos.findByPk(id)
+  const producto = await Productos.findByPk(id)
   res.json(producto)
 
 })
