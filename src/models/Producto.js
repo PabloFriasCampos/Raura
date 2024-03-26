@@ -7,11 +7,15 @@ const Producto = db.define('Producto', {
     allowNull: false
   },
   Categoria: {
-    type: DataTypes.ENUM("COMIDA","BEBIDA")
+    type: DataTypes.STRING,
+    allowNull: false
   },
   Disponible: {
     type: DataTypes.BOOLEAN,
     defaultValue: true
+  },
+  RequiereCocina: {
+    type: DataTypes.BOOLEAN,
   },
   Precio: {
     type: DataTypes.DECIMAL(10, 2)

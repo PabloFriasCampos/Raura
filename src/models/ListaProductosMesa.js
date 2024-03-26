@@ -14,8 +14,11 @@ const ListaProductosMesa = db.define('ListaProductosMesa', {
     type: DataTypes.INTEGER,
     defaultValue: 0
   },
+  Disponible: {
+    type: DataTypes.BOOLEAN,
+  },
   Estado: {
-    type: DataTypes.ENUM("COCINA","SERVIR","LISTO")
+    type: DataTypes.ENUM("COCINA","PREPARACION","SERVIR","LISTO")
   }
 }, {timestamps: false});
 
