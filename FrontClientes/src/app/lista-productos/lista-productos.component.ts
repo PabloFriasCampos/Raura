@@ -1,24 +1,30 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { lastValueFrom } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { APIService } from '../services/api.service';
+import { ProductosXCategoria } from '../models/productos-xcategoria';
+import { Producto } from '../models/producto';
 
 @Component({
   selector: 'app-lista-productos',
   templateUrl: './lista-productos.component.html',
   styleUrls: ['./lista-productos.component.css']
 })
-export class ListaProductosComponent {
+export class ListaProductosComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  productosXCategoria: ProductosXCategoria[] = [];
+  productosMostrados: Producto[] = [];
 
-  async test() {
-    let headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
+  constructor(private api: APIService) { }
 
-    const request$ = await this.http.get('http://localhost:3030/productos', { headers })
-    let json = await lastValueFrom(request$)
-    console.log(json)
+  async ngOnInit(): Promise<void> {
+    this.productosXCategoria = await this.api.getProductos() as ProductosXCategoria[];
+
+  }
+
+  mostrarProductos(categoria: string) {
+    let categoriaEncontrada = this.productosXCategoria.find(cat => cat.Categoria === categoria);
+    if (categoriaEncontrada) {
+      this.productosMostrados = categoriaEncontrada.Productos;
+    }
 
   }
 

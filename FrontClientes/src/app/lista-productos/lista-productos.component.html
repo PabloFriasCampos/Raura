@@ -1,1 +1,10 @@
-<button (click)="test()">TEST</button>
+<div *ngFor="let categoria of productosXCategoria" (click)="mostrarProductos(categoria.Categoria)">
+  {{ categoria.Categoria }}
+</div>
+
+<div>
+  <div *ngFor="let producto of productosMostrados">
+    <p>{{ producto.Nombre }}</p>
+    <p>{{ producto.Precio }}</p>
+  </div>
+</div>

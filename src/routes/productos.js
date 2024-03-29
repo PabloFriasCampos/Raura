@@ -18,7 +18,23 @@ router.get('/', async (req,res) => {
 
 router.get('/', async (req,res) => {
   const productos = await Productos.findAll();
-  res.json(productos)
+
+    const productosAgrupados = [];
+
+    const temporal = {};
+
+    productos.forEach(producto => {
+      if (!temporal[producto.Categoria]) {
+        temporal[producto.Categoria] = [];
+      }
+      temporal[producto.Categoria].push(producto);
+    });
+
+    for (const categoria in temporal) {
+        productosAgrupados.push({ Categoria: categoria, Productos: temporal[categoria] });
+    }
+
+    res.json(productosAgrupados);
 
 })
 
