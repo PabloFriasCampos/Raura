@@ -7,4 +7,4 @@ Aquí podrás encontrar la información necesaria de mi Anteproyecto, redactado 
 
 ## MEMORIA
 Aquí podrás consultar el histórico del flujo de trabajo en mi proyecto: <br>
-[MEMORIA](https://pablofrias.notion.site/Checklist-Requisitos-1b83ee181e1f47188beea8af6b2aec74?pvs=74)
+[MEMORIA](https://pablofrias.notion.site/4bd35765eb334be19f1f77f9e01969a8?v=152c7c520f4f40c282b209c298ab1a06)
