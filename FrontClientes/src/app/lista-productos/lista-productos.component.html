@@ -4,6 +4,8 @@
 
 <div>
   <div *ngFor="let producto of productosMostrados">
+    <!-- <img [src]="'http://localhost:3030/images/' + producto.id + '.jpg'" alt="img"> -->
+    <p>{{ producto.id }}</p>
     <p>{{ producto.Nombre }}</p>
     <p>{{ producto.Precio }}</p>
   </div>

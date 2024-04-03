@@ -1,24 +1,23 @@
 const { DataTypes } = require('sequelize');
 const db = require("../database/database");
 
-const Producto = db.define('Producto', {
+const Trabajador = db.define('Trabajador', {
   Nombre: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  Categoria: {
+  Correo: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  RequiereCocina: {
-    type: DataTypes.BOOLEAN,
+  Contrasena: {
+    type: DataTypes.STRING,
+    allowNull: false
   },
-  Precio: {
-    type: DataTypes.DECIMAL(10, 2)
+  Rol: {
+    type: DataTypes.ENUM("COCINERO","CAMARERO","ADMIN"),
+    allowNull: false
   },
-  Descripcion: {
-    type: DataTypes.TEXT
-  }
 }, {timestamps: false});
 
-module.exports = Producto;
+module.exports = Trabajador;

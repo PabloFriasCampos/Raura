@@ -5,6 +5,7 @@ const Mesas = require('../models/Mesa');
 const ListaProductosMesa = require('../models/ListaProductosMesa');
 const ListaProductosCuenta = require('../models/ListaProductosCuenta');
 const Cuentas = require('../models/Cuenta');
+const Trabajadores = require('../models/Trabajador');
 
 /* // Codigo ejemplo para include (Cruce de tablas)
 router.get('/', async (req,res) => {
@@ -17,8 +18,8 @@ router.get('/', async (req,res) => {
 }) */
 
 router.get('/', async (req,res) => {
-  const productos = await Productos.findAll();
-
+    const productos = await Productos.findAll();
+    console.log(productos)
     const productosAgrupados = [];
 
     const temporal = {};

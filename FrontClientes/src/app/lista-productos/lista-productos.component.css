@@ -1,0 +1,73 @@
+/* Estilos para el tab-group */
+.mat-tab-group {
+  margin-top: 20px;
+}
+
+/* Estilos para los tabs */
+.mat-tab {
+  background-color: var(--cherry-red);
+  /* Utilizamos el color de cereza */
+  color: #fff;
+  /* Color del texto en los tabs */
+  border-radius: 5px;
+}
+
+.mat-tab-label {
+  padding: 10px 20px;
+  /* Ajustar el relleno de las etiquetas de los tabs */
+}
+
+.mat-tab-body-content {
+  padding: 20px;
+  /* Añadir relleno al contenido de los tabs */
+}
+
+/* Estilos para la lista de productos */
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.product-item {
+  width: 300px;
+  margin-bottom: 20px;
+  background-color: var(--light-tone);
+  /* Utilizamos el tono claro */
+  border: 1px solid var(--green);
+  /* Utilizamos el color verde para el borde */
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Sombra suave */
+}
+
+.product-item img {
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.product-item p {
+  margin: 5px 0;
+}
+
+.product-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--cherry-red);
+  /* Utilizamos el color de cereza para el nombre del producto */
+}
+
+.product-price {
+  font-size: 16px;
+  color: var(--green);
+  /* Utilizamos el color verde para el precio */
+}
+
+.product-id {
+  font-size: 14px;
+  color: #666;
+  /* Color gris para el ID del producto */
+}
