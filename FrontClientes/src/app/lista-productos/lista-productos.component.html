@@ -1,12 +1,18 @@
-<div *ngFor="let categoria of productosXCategoria" (click)="mostrarProductos(categoria.Categoria)">
-  {{ categoria.Categoria }}
+<div class="tab-container">
+  <ng-container *ngFor="let categoria of productosXCategoria">
+    <input type="radio" name="categoria" id="{{ categoria.Categoria }}" (change)="mostrarProductos(categoria.Categoria)"
+      class="tab-radio">
+    <label for="{{ categoria.Categoria }}" class="tab">{{ categoria.Categoria }}</label>
+  </ng-container>
 </div>
 
-<div>
-  <div *ngFor="let producto of productosMostrados">
-    <!-- <img [src]="'http://localhost:3030/images/' + producto.id + '.jpg'" alt="img"> -->
-    <p>{{ producto.id }}</p>
-    <p>{{ producto.Nombre }}</p>
-    <p>{{ producto.Precio }}</p>
-  </div>
+<div class="logo">
+  <img src="assets/logo.png" *ngIf="inicio">
+</div>
+
+<div *ngFor="let producto of productosMostrados" class="products">
+  <!-- <img [src]="'http://localhost:3030/images/' + producto.id + '.jpg'" alt="img"> -->
+  <p>{{ producto.id }}</p>
+  <p>{{ producto.Nombre }}</p>
+  <p>{{ producto.Precio }} €</p>
 </div>

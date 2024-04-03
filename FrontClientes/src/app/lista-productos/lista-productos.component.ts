@@ -12,6 +12,7 @@ export class ListaProductosComponent implements OnInit {
 
   productosXCategoria: ProductosXCategoria[] = [];
   productosMostrados: Producto[] = [];
+  inicio: boolean = true;
 
   constructor(private api: APIService) { }
 
@@ -21,6 +22,7 @@ export class ListaProductosComponent implements OnInit {
   }
 
   mostrarProductos(categoria: string) {
+    if (this.inicio) this.inicio = false;
     let categoriaEncontrada = this.productosXCategoria.find(cat => cat.Categoria === categoria);
     if (categoriaEncontrada) {
       this.productosMostrados = categoriaEncontrada.Productos;

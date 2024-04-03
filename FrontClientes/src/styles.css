@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Ginerin';
+  src: url('assets/fonts/Ginerin-Regular.otf') format('truetype');
+}
+
 body {
+  font-family: 'Ginerin';
   background-color: rgb(195, 241, 193);
 }

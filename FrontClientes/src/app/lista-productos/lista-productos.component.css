@@ -1,73 +1,48 @@
-/* Estilos para el tab-group */
-.mat-tab-group {
-  margin-top: 20px;
+.tab-container {
+  white-space: nowrap;
+  padding-bottom: 10px;
+  overflow-x: auto;
 }
 
-/* Estilos para los tabs */
-.mat-tab {
-  background-color: var(--cherry-red);
-  /* Utilizamos el color de cereza */
-  color: #fff;
-  /* Color del texto en los tabs */
+.tab-radio {
+  display: none;
+}
+
+.tab {
+  display: inline-block;
+  padding: 10px 30px;
+  cursor: pointer;
+  background-color: #c4261a;
+  color: #fce5e5;
   border-radius: 5px;
+  margin-right: 5px;
+  white-space: nowrap;
 }
 
-.mat-tab-label {
-  padding: 10px 20px;
-  /* Ajustar el relleno de las etiquetas de los tabs */
+.tab:last-child {
+  margin-right: 0;
 }
 
-.mat-tab-body-content {
-  padding: 20px;
-  /* Añadir relleno al contenido de los tabs */
+.tab:hover {
+  background-color: #550606;
 }
 
-/* Estilos para la lista de productos */
-.product-list {
+.logo {
+  width: auto;
+  max-width: 100%;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  margin-top: 20px;
+  justify-content: center;
+  margin-top: 10vh;
 }
 
-.product-item {
-  width: 300px;
-  margin-bottom: 20px;
-  background-color: var(--light-tone);
-  /* Utilizamos el tono claro */
-  border: 1px solid var(--green);
-  /* Utilizamos el color verde para el borde */
-  border-radius: 10px;
-  padding: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  /* Sombra suave */
+.products {
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 5px 5px;
+  padding: 10px;
+  background-color: #fff;
 }
 
-.product-item img {
-  width: 100%;
-  border-radius: 5px;
-  margin-bottom: 10px;
-}
-
-.product-item p {
-  margin: 5px 0;
-}
-
-.product-name {
-  font-size: 18px;
-  font-weight: bold;
-  color: var(--cherry-red);
-  /* Utilizamos el color de cereza para el nombre del producto */
-}
-
-.product-price {
-  font-size: 16px;
-  color: var(--green);
-  /* Utilizamos el color verde para el precio */
-}
-
-.product-id {
-  font-size: 14px;
-  color: #666;
-  /* Color gris para el ID del producto */
+.tab-radio:checked+label {
+  background-color: #360202;
 }
