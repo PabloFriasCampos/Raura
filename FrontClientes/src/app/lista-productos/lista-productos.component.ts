@@ -18,7 +18,6 @@ export class ListaProductosComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.productosXCategoria = await this.api.getProductos() as ProductosXCategoria[];
-
   }
 
   mostrarProductos(categoria: string) {

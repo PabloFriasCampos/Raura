@@ -1,6 +1,11 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2em;
+}
+
 .tab-container {
   white-space: nowrap;
-  padding-bottom: 10px;
   overflow-x: auto;
 }
 
@@ -12,11 +17,10 @@
   display: inline-block;
   padding: 10px 30px;
   cursor: pointer;
-  background-color: #c4261a;
-  color: #fce5e5;
+  background-color: #bb1e13;
+  color: #f3faee;
   border-radius: 5px;
   margin-right: 5px;
-  white-space: nowrap;
 }
 
 .tab:last-child {
@@ -28,19 +32,26 @@
 }
 
 .logo {
-  width: auto;
-  max-width: 100%;
   display: flex;
   justify-content: center;
+  align-self: center;
   margin-top: 10vh;
 }
 
 .products {
-  border: 1px solid #ccc;
-  border-top: none;
-  border-radius: 0 0 5px 5px;
-  padding: 10px;
+  font-size: .9em;
+  border: 1px solid #70eb95;
+  border-radius: 5px;
+  padding: 2px 10px 2px 10px;
+  margin: 5px;
   background-color: #fff;
+  margin: 5px 10px 5px 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.products:hover {
+  background-color: #f8c4c4;
 }
 
 .tab-radio:checked+label {

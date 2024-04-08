@@ -1,3 +1,8 @@
+<div class="header">
+  <p>MESA 1</p>
+  <p>CESTA</p>
+</div>
+
 <div class="tab-container">
   <ng-container *ngFor="let categoria of productosXCategoria">
     <input type="radio" name="categoria" id="{{ categoria.Categoria }}" (change)="mostrarProductos(categoria.Categoria)"
@@ -6,13 +11,12 @@
   </ng-container>
 </div>
 
-<div class="logo">
-  <img src="assets/logo.png" *ngIf="inicio">
+<div class="logo" *ngIf="inicio">
+  <img src="assets/logo.png">
 </div>
 
-<div *ngFor="let producto of productosMostrados" class="products">
+<div *ngFor="let producto of productosMostrados" class="products" [routerLink]="'/producto/' + producto.id">
   <!-- <img [src]="'http://localhost:3030/images/' + producto.id + '.jpg'" alt="img"> -->
-  <p>{{ producto.id }}</p>
   <p>{{ producto.Nombre }}</p>
   <p>{{ producto.Precio }} €</p>
 </div>

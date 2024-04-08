@@ -19,7 +19,6 @@ router.get('/', async (req,res) => {
 
 router.get('/', async (req,res) => {
     const productos = await Productos.findAll();
-    console.log(productos)
     const productosAgrupados = [];
 
     const temporal = {};
