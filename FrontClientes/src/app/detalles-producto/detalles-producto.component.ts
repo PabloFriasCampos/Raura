@@ -12,6 +12,8 @@ export class DetallesProductoComponent implements OnInit {
 
   producto: Producto = new Producto();
   imageUrl: string = '';
+  cantidad = 1;
+  id = sessionStorage.getItem('id') || '0'
 
   constructor(private api: APIService, private activatedRoute: ActivatedRoute) { }
 
@@ -20,6 +22,17 @@ export class DetallesProductoComponent implements OnInit {
     if (id) {
       this.producto = await this.api.cargarProducto(+id);
       this.imageUrl = this.api.getFotoUrl(+id);
+    }
+  }
+
+  async addToMesa() {
+    await this.api.addToMesa(this.producto, this.cantidad, +this.id);
+  }
+
+  changeCantidad(dif: number) {
+    this.cantidad += dif;
+    if (this.cantidad < 1) {
+      this.cantidad = 1;
     }
   }
 

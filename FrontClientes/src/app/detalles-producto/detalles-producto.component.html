@@ -1,7 +1,17 @@
-<p>{{producto.id}}</p>
-<p>{{producto.Categoria}}</p>
-<p>{{producto.Descripcion}}</p>
-<p>{{producto.Disponible}}</p>
-<p>{{producto.Nombre}}</p>
-<p>{{producto.Precio}}</p>
-<p>{{producto.RequiereCocina}}</p>
+<button class="back-button" [routerLink]="'/mesa/' + id">BACK</button>
+<div class="container">
+  <h2 class="titulo">{{producto.Nombre}}</h2>
+  <img class="imagen" [src]="imageUrl" alt="Producto">
+  <div class="cantidad">
+    <img src="assets/menos.png" class="modifier" (click)="changeCantidad(-1)">
+    <div>{{this.cantidad}}</div>
+    <img src="assets/mas.png" class="modifier" (click)="changeCantidad(+1)">
+  </div>
+  <button class="boton" (click)="addToMesa()">
+    <div class="add">Añadir<img src="assets/carritomas.png" class="fotoadd"/></div>
+  </button>
+  <div class="descripcion">
+    <h4>Descripción: </h4>
+    <div>{{producto.Descripcion}}</div>
+  </div>
+</div>

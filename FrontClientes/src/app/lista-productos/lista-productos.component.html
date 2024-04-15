@@ -1,6 +1,6 @@
 <div class="header">
-  <p>MESA 1</p>
-  <p>CESTA</p>
+  <div>MESA {{id}}</div>
+  <img src="assets/carrito.png" class="carritoimg" [routerLink]="'/carrito/1'">
 </div>
 
 <div class="tab-container">
@@ -16,7 +16,6 @@
 </div>
 
 <div *ngFor="let producto of productosMostrados" class="products" [routerLink]="'/producto/' + producto.id">
-  <!-- <img [src]="'http://localhost:3030/images/' + producto.id + '.jpg'" alt="img"> -->
   <p>{{ producto.Nombre }}</p>
   <p>{{ producto.Precio }} €</p>
 </div>

@@ -1,0 +1,14 @@
+<div class="header">
+  <button class="back-button" [routerLink]="'/mesa/' + mesa.id">BACK</button>
+  <div>MESA {{mesa.id}}</div>
+</div>
+
+<div *ngFor="let producto of mesa.Productos" class="products" [routerLink]="'/producto/' + producto.Producto.id">
+  <p>{{ producto.Producto.Nombre }}</p>
+  <p> {{ producto.Cantidad }}</p>
+  <p>{{ (producto.Producto.Precio  * producto.Cantidad).toFixed(2)}} €</p>
+</div>
+<div class="total">
+  <p>TOTAL : </p>
+  <p>50 €</p>
+</div>
