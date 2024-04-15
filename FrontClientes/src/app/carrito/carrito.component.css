@@ -26,6 +26,7 @@
   background-color: #bb1e13;
   color: #f3faee;
   border-radius: 5px;
+  font-family: 'Ginerin';
 }
 
 .total {
@@ -37,4 +38,27 @@
   margin: 5px 10px 5px 10px;
   display: flex;
   justify-content: space-between;
+}
+
+.botones {
+  height: 100px;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.boton {
+  cursor: pointer;
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid #bb1e13;
+  color: #bb1e13;
+  font-family: 'Ginerin';
+}
+
+.boton:hover {
+  background-color: #70eb95;
 }
