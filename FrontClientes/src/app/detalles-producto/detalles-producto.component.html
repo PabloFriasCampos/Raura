@@ -6,6 +6,7 @@
     <img src="assets/menos.png" class="modifier" (click)="changeCantidad(-1)">
     <div>{{this.cantidad}}</div>
     <img src="assets/mas.png" class="modifier" (click)="changeCantidad(+1)">
+    <div>Total: {{(this.cantidad * this.producto.Precio).toFixed(2)}} €</div>
   </div>
   <button class="boton" (click)="addToMesa()">
     <div class="add">Añadir<img src="assets/carritomas.png" class="fotoadd"/></div>

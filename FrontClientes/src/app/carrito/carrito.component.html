@@ -3,14 +3,18 @@
   <div>MESA {{mesa.id}}</div>
 </div>
 
-<div *ngFor="let producto of mesa.Productos" class="products" [routerLink]="'/producto/' + producto.Producto.id">
-  <p>{{ producto.Producto.Nombre }}</p>
-  <p> {{ producto.Cantidad }}</p>
-  <p>{{ (producto.Producto.Precio  * producto.Cantidad).toFixed(2)}} €</p>
+<div *ngFor="let producto of mesa.Productos" class="products">
+  <p [routerLink]="'/producto/' + producto.Producto.id" class="nombre">{{ producto.Producto.Nombre }}</p>
+  <div class="cantidad">
+    <img src="assets/menos.png" class="modifier" (click)="changeCantidad(-1, producto)">
+    <div>{{producto.Cantidad}}</div>
+    <img src="assets/mas.png" class="modifier" (click)="changeCantidad(+1, producto)">
+  </div>
+  <p class="precio">{{ (producto.Producto.Precio  * producto.Cantidad).toFixed(2)}} €</p>
 </div>
 <div class="total">
   <p>TOTAL : </p>
-  <p>50 €</p>
+  <p>{{this.total.toFixed(2)}} €</p>
 </div>
 
 <div class="botones">

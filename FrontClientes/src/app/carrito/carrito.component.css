@@ -11,12 +11,11 @@
   font-size: .9em;
   border: 1px solid #70eb95;
   border-radius: 5px;
-  padding: 2px 10px 2px 10px;
-  margin: 5px;
+  padding: 10px;
+  margin: 5px 10px;
   background-color: #fff;
-  margin: 5px 10px 5px 10px;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
 }
 
 .back-button {
@@ -32,21 +31,19 @@
 .total {
   font-size: .9em;
   border-radius: 5px;
-  padding: 2px 10px 2px 10px;
-  margin: 5px;
+  padding: 10px;
+  margin: 5px 10px;
   background-color: #70eb95;
-  margin: 5px 10px 5px 10px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .botones {
-  height: 100px;
   margin-top: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
 }
 
 .boton {
@@ -57,6 +54,29 @@
   border: 1px solid #bb1e13;
   color: #bb1e13;
   font-family: 'Ginerin';
+  margin-bottom: 10px;
+}
+
+.nombre {
+  width: 52%;
+}
+
+.cantidad {
+  width: 23%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.precio {
+  text-align: center;
+  width: 19%;
+}
+
+.modifier {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }
 
 .boton:hover {
