@@ -15,7 +15,7 @@ const ListaProductosMesa = db.define('ListaProductosMesa', {
     defaultValue: 0
   },
   Estado: {
-    type: DataTypes.ENUM("COCINA","PREPARACION","SERVIR","LISTO")
+    type: DataTypes.ENUM("CESTA","COCINA","PREPARACION","SERVIR","LISTO","SERVIDO")
   }
 }, {timestamps: false});
 

@@ -39,7 +39,7 @@ router.post('/add/:id', async (req,res) => {
           ProductoId: producto.id,
           MesaId: req.params.id,
           Cantidad: +req.query.cantidad,
-          Estado: producto.RequiereCocina ? 'COCINA' : 'SERVIR'
+          Estado: 'CESTA'
         });
   }
   res.status(200)

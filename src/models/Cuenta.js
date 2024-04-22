@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const db = require("../database/database");
+const Trabajador = require('./Trabajador');
 
 const Cuenta = db.define('Cuenta', {
   NumeroMesa: {
@@ -8,7 +9,13 @@ const Cuenta = db.define('Cuenta', {
   },
   FechaCuenta: {
     type: DataTypes.DATE
+  },
+  TotalCuenta: {
+    type: DataTypes.DECIMAL
   }
 }, {timestamps: false});
+
+Trabajador.hasMany(Cuenta, { foreignKey: 'TrabajadorID'});
+Cuenta.belongsTo(Trabajador, { foreignKey: 'TrabajadorID'});
 
 module.exports = Cuenta;

@@ -9,14 +9,7 @@ const app = express();
 
 const port = process.env.PORT || 3030;
 
-(async () => {
-  try {
-    await db.authenticate()
-    await db.sync()
-  } catch (error) {
-    throw new Error(error)
-  }
-})()
+databaseStart();
 
 app.use(express.json())
 app.use(cors())
@@ -28,3 +21,12 @@ app.use('/mesas', mesas)
 app.listen(port, () => {
   console.log('Servidor ejecutándose en el puerto: ', port)
 })
+
+async function databaseStart() {
+  try {
+    await db.authenticate()
+    await db.sync()
+  } catch (error) {
+    throw new Error(error)
+  }
+}

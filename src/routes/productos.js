@@ -13,23 +13,23 @@ router.get('/', async (req,res) => {
 }) */
 
 router.get('/', async (req,res) => {
-    const productos = await Productos.findAll();
-    const productosAgrupados = [];
+  const productos = await Productos.findAll();
+  const productosAgrupados = [];
 
-    const temporal = {};
+  const temporal = {};
 
-    productos.forEach(producto => {
-      if (!temporal[producto.Categoria]) {
-        temporal[producto.Categoria] = [];
-      }
-      temporal[producto.Categoria].push(producto);
-    });
-
-    for (const categoria in temporal) {
-        productosAgrupados.push({ Categoria: categoria, Productos: temporal[categoria] });
+  productos.forEach(producto => {
+    if (!temporal[producto.Categoria]) {
+      temporal[producto.Categoria] = [];
     }
+    temporal[producto.Categoria].push(producto);
+  });
 
-    res.json(productosAgrupados);
+  for (const categoria in temporal) {
+      productosAgrupados.push({ Categoria: categoria, Productos: temporal[categoria] });
+  }
+
+  res.json(productosAgrupados);
 })
 
 router.get('/:id', async (req,res) => {
