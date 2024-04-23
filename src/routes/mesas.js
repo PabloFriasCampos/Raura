@@ -5,6 +5,7 @@ const Mesas = require('../models/Mesa')
 const ListaProductosMesa = require('../models/ListaProductosMesa');
 
 router.get('/:id', async (req, res) => {
+  try {
   const id = req.params.id;
   const mesa = await Mesas.findOne({
     where: { id: id },
@@ -19,30 +20,37 @@ router.get('/:id', async (req, res) => {
     }));
     const mesaMontada = {id: mesa.id, Productos: listaProductos};
 
-    res.json(mesaMontada);
+    res.status(200).json(mesaMontada);
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
+  }
 });
 
 
 router.post('/add/:id', async (req,res) => {
-  const producto = await Productos.findByPk(req.body.id)
-  const yaExiste = await ListaProductosMesa.findOne({
-      where: {
-        ProductoId: producto.id,
-        MesaId: req.params.id
-      }
-    });
-  if(yaExiste){
-    yaExiste.Cantidad += +req.query.cantidad;
-    await yaExiste.save();
-  }else{
-    await ListaProductosMesa.create({
+  try {
+    const producto = await Productos.findByPk(req.body.id)
+    const yaExiste = await ListaProductosMesa.findOne({
+        where: {
           ProductoId: producto.id,
-          MesaId: req.params.id,
-          Cantidad: +req.query.cantidad,
-          Estado: 'CESTA'
-        });
+          MesaId: req.params.id
+        }
+      });
+    if(yaExiste){
+      yaExiste.Cantidad += +req.query.cantidad;
+      await yaExiste.save();
+    }else{
+      await ListaProductosMesa.create({
+            ProductoId: producto.id,
+            MesaId: req.params.id,
+            Cantidad: +req.query.cantidad,
+            Estado: 'CESTA'
+          });
+    }
+    res.status(200);
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
   }
-  res.status(200)
 })
 
 module.exports = router

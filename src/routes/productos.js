@@ -2,40 +2,38 @@ const router = require('express').Router();
 
 const Productos = require('../models/Producto')
 
-/* // Codigo ejemplo para include (Cruce de tablas)
 router.get('/', async (req,res) => {
-  const cuenta = await Cuentas.findAll({
-    where: {id: 1},
-    include: Productos
-  });
-  res.json(cuenta)
-
-}) */
-
-router.get('/', async (req,res) => {
-  const productos = await Productos.findAll();
-  const productosAgrupados = [];
-
-  const temporal = {};
-
-  productos.forEach(producto => {
-    if (!temporal[producto.Categoria]) {
-      temporal[producto.Categoria] = [];
+  try {
+    const productos = await Productos.findAll();
+    const productosAgrupados = [];
+  
+    const temporal = {};
+  
+    productos.forEach(producto => {
+      if (!temporal[producto.Categoria]) {
+        temporal[producto.Categoria] = [];
+      }
+      temporal[producto.Categoria].push(producto);
+    });
+  
+    for (const categoria in temporal) {
+        productosAgrupados.push({ Categoria: categoria, Productos: temporal[categoria] });
     }
-    temporal[producto.Categoria].push(producto);
-  });
-
-  for (const categoria in temporal) {
-      productosAgrupados.push({ Categoria: categoria, Productos: temporal[categoria] });
+  
+    res.status(200).json(productosAgrupados);
+  } catch (error) {
+    return res.status(500).json({ message: "Internal server error" });
   }
-
-  res.json(productosAgrupados);
 })
 
 router.get('/:id', async (req,res) => {
-  const id = req.params.id
-  const producto = await Productos.findByPk(id)
-  res.json(producto)
+  try {
+    const id = req.params.id
+    const producto = await Productos.findByPk(id)
+    res.status(200).json(producto)
+  } catch (error) {
+    return res.status(500).json({ message: "Internal server error" });
+  }
 })
 
 module.exports = router
