@@ -12,8 +12,8 @@ router.post("/login", async (req, res) => {
     }
     const trabajador = await Trabajador.findOne({ where: {Correo: Correo, Contrasena: Contrasena}})
     if (trabajador != null && trabajador != undefined) {
-      const token = jwt.sign({ Correo }, secretKey, { expiresIn: "1h" });
-      return res.status(200).json({ token });
+      const token = jwt.sign({ Correo }, secretKey, { expiresIn: "18h" });
+      return res.status(200).json({ token: token });
     } else {
       return res.status(401).json({ message: "Authentication failed" });
     }
@@ -22,9 +22,9 @@ router.post("/login", async (req, res) => {
   }
 });
 
-/* router.get("/protected", verifyToken, async (req, res) => {
+router.get("/protected", verifyToken, async (req, res) => {
   return res.status(200).json({ message: "You have access" });
-}); */
+});
 
 function verifyToken(req, res, next) {
   const header = req.header("Authorization") || "";
