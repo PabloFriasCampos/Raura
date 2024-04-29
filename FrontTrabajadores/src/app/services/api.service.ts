@@ -20,15 +20,23 @@ export class APIService {
     return await lastValueFrom(request$);
   }
 
-  async testProtected() {
-    let JWT = sessionStorage.getItem('JWT')
-    if (JWT) {
-      const optionsJWT = this.getRequestOptionsJWT(JWT);
-      const request$ = this.http.get(`${this.API_URL}/auth/protected`, optionsJWT);
-      console.log(await lastValueFrom(request$))
-    } else {
-      console.log('No access')
-    }
+  /*   async testProtected() {
+      let JWT = sessionStorage.getItem('JWT')
+      if (JWT) {
+        const optionsJWT = this.getRequestOptionsJWT(JWT);
+        const request$ = this.http.get(`${this.API_URL}/auth/protected`, optionsJWT);
+        console.log(await lastValueFrom(request$))
+      } else {
+        console.log('No access')
+      }
+    } */
+
+  // --------------------- COCINA ---------------------
+
+  async getAllCocina() {
+    let options = this.getRequestOptions();
+    const request$ = this.http.get(`${this.API_URL}/cocina/all`, options);
+    return await lastValueFrom(request$);
   }
 
   // --------------------- MÉTODOS ---------------------

@@ -11,6 +11,7 @@ databaseStart();
 const productos = require('./routes/productos');
 const mesas = require('./routes/mesas');
 const login = require('./routes/login');
+const cocina = require('./routes/cocina');
 
 app.use(express.json());
 app.use(cors());
@@ -19,6 +20,7 @@ app.use('/images', express.static(__dirname + '/images'));
 app.use('/productos', productos);
 app.use('/mesas', mesas);
 app.use('/auth', login);
+app.use('/cocina', cocina)
 
 app.listen(port, () => {
   console.log('Servidor ejecutándose en el puerto: ', port)

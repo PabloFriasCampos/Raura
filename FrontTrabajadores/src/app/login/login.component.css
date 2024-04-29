@@ -58,3 +58,12 @@
   align-items: center;
   justify-content: center;
 }
+
+.login-error {
+  position: absolute;
+  margin-left: 20%;
+  top: 250px;
+  background-color: #f07d74;
+  padding: 10px;
+  border-radius: 5px;
+}
