@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { last, lastValueFrom } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 import { ProductosXCategoria } from '../models/productos-xcategoria';
 import { Producto } from '../models/producto';
 import { Mesa } from '../models/mesa';
+import { SocketService } from './socket.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,9 @@ export class APIService {
 
   API_URL: String = 'http://localhost:3030';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private socketService: SocketService) {
+    this.socketService.listen();
+  }
 
   // --------------------- PRODUCTOS ---------------------
 
@@ -31,7 +34,8 @@ export class APIService {
   async addToMesa(producto: Producto, cantidad: number, mesaId: number) {
     let options = this.getRequestOptions();
     const request$ = await this.http.post(`${this.API_URL}/mesas/add/${mesaId}?cantidad=${cantidad}`, JSON.stringify(producto), options)
-    return await lastValueFrom(request$);
+    await lastValueFrom(request$);
+    await this.refrescar();
   }
 
   async getMesa(id: number): Promise<Mesa> {
@@ -52,6 +56,10 @@ export class APIService {
       }),
       responseType: 'text'
     };
+  }
+
+  refrescar() {
+    this.socketService.refrescar();
   }
 
 }
