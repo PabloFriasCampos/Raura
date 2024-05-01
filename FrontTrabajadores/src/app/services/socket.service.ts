@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { Observable } from 'rxjs';
 import { Pedidos } from '../models/pedidos';
+import * as api from '../../assets/api.json';
 
 class MySocket extends Socket {
   constructor(urlSocket: string) {
@@ -19,7 +20,8 @@ class MySocket extends Socket {
 })
 export class SocketService {
 
-  API_URL: string = 'http://localhost:3030';
+  api: any = api;
+  API_URL: string = this.api.API_URL;
 
   private socket: MySocket;
 

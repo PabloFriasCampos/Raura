@@ -1,13 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
+import * as api from '../../assets/api.json';
 
 @Injectable({
   providedIn: 'root'
 })
 export class APIService {
 
-  API_URL: String = 'http://localhost:3030';
+  api: any = api;
+  API_URL: String = this.api.API_URL;
 
   constructor(private http: HttpClient) { }
 

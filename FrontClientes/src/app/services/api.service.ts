@@ -6,13 +6,15 @@ import { Producto } from '../models/producto';
 import { Mesa } from '../models/mesa';
 import { SocketService } from './socket.service';
 import { ListaProductos } from '../models/lista-productos';
+import * as api from '../../assets/api.json';
 
 @Injectable({
   providedIn: 'root'
 })
 export class APIService {
 
-  API_URL: String = 'http://localhost:3030';
+  api: any = api;
+  API_URL: String = this.api.API_URL;
 
   constructor(private http: HttpClient, private socketService: SocketService) {
     this.socketService.listen();
