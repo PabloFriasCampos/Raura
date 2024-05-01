@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { APIService } from '../services/api.service';
 import { Producto } from '../models/producto';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-detalles-producto',
@@ -15,7 +16,7 @@ export class DetallesProductoComponent implements OnInit {
   cantidad = 1;
   id = sessionStorage.getItem('id') || '0'
 
-  constructor(private api: APIService, private activatedRoute: ActivatedRoute) { }
+  constructor(private api: APIService, private activatedRoute: ActivatedRoute, private toastr: ToastrService) { }
 
   async ngOnInit(): Promise<void> {
     const id = await this.activatedRoute.snapshot.paramMap.get('id');
@@ -26,7 +27,12 @@ export class DetallesProductoComponent implements OnInit {
   }
 
   async addToMesa() {
-    await this.api.addToMesa(this.producto, this.cantidad, +this.id);
+    try {
+      await this.api.addToMesa(this.producto, this.cantidad, +this.id);
+      this.toastr.success('Añadido a la cesta')
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   changeCantidad(dif: number) {

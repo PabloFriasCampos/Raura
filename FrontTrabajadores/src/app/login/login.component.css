@@ -5,6 +5,17 @@
   height: 100vh;
 }
 
+.center-top {
+  position: absolute;
+  top: 0px;
+}
+
+.center-top h1 {
+  color: white;
+  text-shadow: 1px 1px 0 black, 1px -1px 0 black, -1px 1px 0 black, -1px -1px 0 black;
+  font-size: 100px;
+}
+
 .left-side {
   height: 100%;
   flex: 1;
@@ -57,13 +68,4 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.login-error {
-  position: absolute;
-  margin-left: 20%;
-  top: 250px;
-  background-color: #f07d74;
-  padding: 10px;
-  border-radius: 5px;
 }

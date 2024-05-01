@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { APIService } from '../services/api.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   JWT: any;
   wrongLogin: boolean = false;
 
-  constructor(private api: APIService, private router: Router) { }
+  constructor(private api: APIService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit() {
     let JsonWebToken = sessionStorage.getItem('JWT');
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit {
       sessionStorage.setItem('JWT', this.JWT);
       this.router.navigate(['/cocina']);
     } catch (error) {
-      this.wrongLogin = true;
+      this.toastr.error('Usuario o contraseña incorrectos')
     }
   }
 
