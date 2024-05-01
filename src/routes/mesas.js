@@ -33,7 +33,8 @@ router.post('/add/:id', async (req,res) => {
     const yaExiste = await ListaProductosMesa.findOne({
         where: {
           ProductoId: producto.id,
-          MesaId: req.params.id
+          MesaId: req.params.id,
+          Estado: 'CESTA'
         }
       });
     if(yaExiste){
@@ -49,7 +50,7 @@ router.post('/add/:id', async (req,res) => {
     }
     res.status(200).json({ message: 'ok'});
   } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: error });
   }
 })
 

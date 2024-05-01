@@ -1,4 +1,20 @@
-<div *ngFor="let pedido of pedidos">
-  <div>{{pedido.Producto.Nombre}}</div>
-  <div>{{pedido.Cantidad}}</div>
+<div class="container">
+  <div class="left-side">
+    <h1>En cocina</h1>
+    <div *ngFor="let pedido of pedidosCocina" class="pedido">
+      <p>ANT</p>
+      <p class="nombre">{{pedido.Producto.Nombre}}</p>
+      <p class="cantidad">{{pedido.Cantidad}} uds</p>
+      <p>SIG</p>
+    </div>
+  </div>
+  <div class="right-side">
+    <h1>En preparación</h1>
+    <div *ngFor="let pedido of pedidosPreparacion" class="pedido">
+      <p>ANT</p>
+      <p class="nombre">{{pedido.Producto.Nombre}}</p>
+      <p class="cantidad">{{pedido.Cantidad}} uds</p>
+      <p>SIG</p>
+    </div>
+  </div>
 </div>

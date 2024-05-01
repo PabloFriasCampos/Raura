@@ -45,9 +45,15 @@ export class CarritoComponent {
     if (this.mesa.Productos.length == 0) {
       this.toastr.warning('No hay nada que mandar')
     } else {
-      await this.api.mandarCocina(this.mesa.Productos);
-      this.mesa.Productos = [];
-      this.total = 0;
+      try {
+        await this.api.mandarCocina(this.mesa.Productos);
+        this.toastr.success('Mandado a cocina')
+        this.mesa.Productos = [];
+        this.total = 0;
+      } catch (error) {
+        console.log(error)
+        this.toastr.error('Se ha producido un error')
+      }
     }
   }
 

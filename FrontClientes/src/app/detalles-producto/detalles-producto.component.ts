@@ -29,8 +29,9 @@ export class DetallesProductoComponent implements OnInit {
   async addToMesa() {
     try {
       await this.api.addToMesa(this.producto, this.cantidad, +this.id);
-      this.toastr.success('Añadido a la cesta')
+      this.toastr.info('Añadido a la cesta')
     } catch (error) {
+      this.toastr.error('No se pudo añadir a la cesta')
       console.log(error)
     }
   }

@@ -10,12 +10,16 @@ import { Pedidos } from '../models/pedidos';
 export class VistaCocineroComponent implements OnInit {
 
   pedidos: Pedidos[] = [];
+  pedidosCocina: Pedidos[] = [];
+  pedidosPreparacion: Pedidos[] = []
 
   constructor(private socketService: SocketService) { }
 
   ngOnInit() {
     this.socketService.getAllPedidos().subscribe((data: Pedidos[]) => {
       this.pedidos = data as Pedidos[];
+      this.pedidosCocina = this.pedidos.filter((pedido) => pedido.Estado == 'COCINA');
+      this.pedidosPreparacion = this.pedidos.filter((pedido) => pedido.Estado == 'PREPARACION');
     });
     this.socketService.listen();
   }
@@ -23,6 +27,8 @@ export class VistaCocineroComponent implements OnInit {
   getAllPedidos() {
     this.socketService.getAllPedidos().subscribe((data: Pedidos[]) => {
       this.pedidos = data as Pedidos[];
+      this.pedidosCocina = this.pedidos.filter((pedido) => pedido.Estado == 'COCINA');
+      this.pedidosPreparacion = this.pedidos.filter((pedido) => pedido.Estado == 'PREPARACION');
     });
   }
 
