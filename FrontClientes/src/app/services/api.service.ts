@@ -5,6 +5,7 @@ import { ProductosXCategoria } from '../models/productos-xcategoria';
 import { Producto } from '../models/producto';
 import { Mesa } from '../models/mesa';
 import { SocketService } from './socket.service';
+import { ListaProductos } from '../models/lista-productos';
 
 @Injectable({
   providedIn: 'root'
@@ -35,12 +36,23 @@ export class APIService {
     let options = this.getRequestOptions();
     const request$ = await this.http.post(`${this.API_URL}/mesas/add/${mesaId}?cantidad=${cantidad}`, JSON.stringify(producto), options)
     await lastValueFrom(request$);
-    await this.refrescar();
   }
 
   async getMesa(id: number): Promise<Mesa> {
     const request$ = await this.http.get(`${this.API_URL}/mesas/${id}`);
     return await lastValueFrom(request$) as Mesa;
+  }
+
+  async changeCantidad(total: number, id: number) {
+    const request$ = await this.http.get(`${this.API_URL}/mesas/cantidad/${id}?cantidad=${total}`);
+    await lastValueFrom(request$);
+  }
+
+  async mandarCocina(productos: ListaProductos[]) {
+    let options = this.getRequestOptions();
+    const request$ = await this.http.post(`${this.API_URL}/mesas/send`, JSON.stringify(productos), options)
+    await lastValueFrom(request$);
+    await this.refrescar();
   }
 
   // --------------------- MÉTODOS ---------------------

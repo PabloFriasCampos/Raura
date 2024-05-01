@@ -3,6 +3,7 @@ import { APIService } from '../services/api.service';
 import { Mesa } from '../models/mesa';
 import { ActivatedRoute } from '@angular/router';
 import { ListaProductos } from '../models/lista-productos';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-carrito',
@@ -14,7 +15,7 @@ export class CarritoComponent {
   total: number = 0;
   mesa: Mesa = new Mesa();
 
-  constructor(private api: APIService, private activatedRoute: ActivatedRoute) { }
+  constructor(private api: APIService, private activatedRoute: ActivatedRoute, private toastr: ToastrService) { }
 
   async ngOnInit(): Promise<void> {
     const id = await this.activatedRoute.snapshot.paramMap.get('id');
@@ -24,8 +25,9 @@ export class CarritoComponent {
     }
   }
 
-  changeCantidad(dif: number, producto: ListaProductos) {
+  async changeCantidad(dif: number, producto: ListaProductos) {
     producto.Cantidad += dif;
+    await this.api.changeCantidad(producto.Cantidad, producto.id);
     if (producto.Cantidad <= 0) {
       this.mesa.Productos.splice(this.mesa.Productos.indexOf(producto), 1)
     }
@@ -36,6 +38,16 @@ export class CarritoComponent {
     this.total = 0;
     for (let producto of this.mesa.Productos) {
       this.total += +(producto.Cantidad * producto.Producto.Precio).toFixed(2);
+    }
+  }
+
+  async mandarCocina() {
+    if (this.mesa.Productos.length == 0) {
+      this.toastr.warning('No hay nada que mandar')
+    } else {
+      await this.api.mandarCocina(this.mesa.Productos);
+      this.mesa.Productos = [];
+      this.total = 0;
     }
   }
 

@@ -53,4 +53,34 @@ router.post('/add/:id', async (req,res) => {
   }
 })
 
+router.get('/cantidad/:id', async (req,res) => {
+  try {
+    const productoMesa = await ListaProductosMesa.findByPk(req.params.id);
+    productoMesa.Cantidad = +req.query.cantidad;
+    if(productoMesa.Cantidad == 0){
+      await productoMesa.destroy()
+    }else {
+      await productoMesa.save();
+    }
+
+    res.status(200).json({ message: 'ok'});
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
+  }
+})
+
+router.post('/send', async (req,res) => {
+  try {
+    let productos = req.body
+    productos.forEach(async producto => {
+      let productoMesa = await ListaProductosMesa.findByPk(producto.id);
+      productoMesa.Estado = producto.Producto.RequiereCocina ? 'COCINA' : 'SERVIR';
+      await productoMesa.save();
+    });
+    res.status(200).json({ message: 'ok'});
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
+  }
+})
+
 module.exports = router
