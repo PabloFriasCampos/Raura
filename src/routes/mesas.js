@@ -84,4 +84,15 @@ router.post('/send', async (req,res) => {
   }
 })
 
+router.get('/estado/:id', async (req,res) => {
+  try {
+    let productoMesa = await ListaProductosMesa.findByPk(req.params.id);
+    productoMesa.Estado = req.query.estado;
+    await productoMesa.save();
+    res.status(200).json({ message: 'ok'});
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
+  }
+})
+
 module.exports = router

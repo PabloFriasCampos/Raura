@@ -47,4 +47,8 @@ export class SocketService {
     });
   }
 
+  refrescar() {
+    this.socket.emit('refrescar');
+  }
+
 }

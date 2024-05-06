@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import * as api from '../../assets/api.json';
+import { SocketService } from './socket.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class APIService {
   api: any = api;
   API_URL: String = this.api.API_URL;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private socketService: SocketService) { }
 
   // --------------------- LOG IN ---------------------
 
@@ -35,10 +36,10 @@ export class APIService {
 
   // --------------------- COCINA ---------------------
 
-  async getAllCocina() {
-    let options = this.getRequestOptions();
-    const request$ = this.http.get(`${this.API_URL}/cocina/all`, options);
-    return await lastValueFrom(request$);
+  async cambiarEstado(id: number, estado: string) {
+    const request$ = await this.http.get(`${this.API_URL}/mesas/estado/${id}/?estado=${estado}`);
+    await lastValueFrom(request$);
+    setTimeout(() => this.refrescar(), 2000)
   }
 
   // --------------------- MÉTODOS ---------------------
@@ -60,6 +61,10 @@ export class APIService {
       }),
       responseType: 'text'
     };
+  }
+
+  refrescar() {
+    this.socketService.refrescar();
   }
 
 }

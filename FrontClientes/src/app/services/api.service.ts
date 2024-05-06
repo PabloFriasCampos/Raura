@@ -54,7 +54,7 @@ export class APIService {
     let options = this.getRequestOptions();
     const request$ = await this.http.post(`${this.API_URL}/mesas/send`, JSON.stringify(productos), options)
     await lastValueFrom(request$);
-    setTimeout(() => this.refrescar(), 200)
+    setTimeout(() => this.refrescar(), 2000)
   }
 
   // --------------------- MÉTODOS ---------------------

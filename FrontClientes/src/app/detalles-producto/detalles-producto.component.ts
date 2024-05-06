@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { APIService } from '../services/api.service';
 import { Producto } from '../models/producto';
 import { ToastrService } from 'ngx-toastr';
@@ -16,7 +16,7 @@ export class DetallesProductoComponent implements OnInit {
   cantidad = 1;
   id = sessionStorage.getItem('id') || '0'
 
-  constructor(private api: APIService, private activatedRoute: ActivatedRoute, private toastr: ToastrService) { }
+  constructor(private api: APIService, private activatedRoute: ActivatedRoute, private toastr: ToastrService, private router: Router) { }
 
   async ngOnInit(): Promise<void> {
     const id = await this.activatedRoute.snapshot.paramMap.get('id');
@@ -30,6 +30,7 @@ export class DetallesProductoComponent implements OnInit {
     try {
       await this.api.addToMesa(this.producto, this.cantidad, +this.id);
       this.toastr.info('Añadido a la cesta')
+      this.router.navigate(['/mesa/' + this.id])
     } catch (error) {
       this.toastr.error('No se pudo añadir a la cesta')
       console.log(error)
