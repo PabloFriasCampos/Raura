@@ -9,12 +9,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { VistaCocineroComponent } from './vista-cocinero/vista-cocinero.component';
+import { VistaCamareroComponent } from './vista-camarero/vista-camarero.component';
+import { VistaMesaComponent } from './vista-mesa/vista-mesa.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    VistaCocineroComponent
+    VistaCocineroComponent,
+    VistaCamareroComponent,
+    VistaMesaComponent
   ],
   imports: [
     BrowserModule,

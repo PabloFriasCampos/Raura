@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="left-side">
+    <h1>Para Servir</h1>
+    <div *ngFor="let pedido of pedidosServir" class="pedido">
+      <p class="estado" [routerLink]="'/mesa/' + pedido.MesaId">Mesa {{pedido.MesaId}}</p>
+      <p class="nombre">{{pedido.Producto.Nombre}}</p>
+      <p class="cantidad">{{pedido.Cantidad}} uds</p>
+      <p class="estado">Servido</p>
+    </div>
+  </div>
+  <div class="right-side">
+    <h1>Mesas</h1>
+    <div *ngFor="let mesa of mesas" class="pedido" [routerLink]="'/mesa/' + mesa.id">
+      <p class="nombre">Mesa {{mesa.id}}</p>
+      <p class="estado">Ver detalles</p>
+    </div>
+  </div>
+</div>

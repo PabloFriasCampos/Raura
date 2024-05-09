@@ -24,6 +24,7 @@ export class VistaCocineroComponent implements OnInit {
       this.pedidosPreparacion = this.pedidos.filter((pedido) => pedido.Estado == 'PREPARACION');
     });
     this.socketService.listen();
+    this.socketService.refrescar();
   }
 
   getAllPedidos() {

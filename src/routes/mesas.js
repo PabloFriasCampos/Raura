@@ -12,8 +12,11 @@ router.get('/:id', async (req, res) => {
       include: Productos
     });
 
-    const listaProductos = mesa.Productos.filter(producto => producto.ListaProductosMesa.Estado === 'CESTA')
-      .map(producto => ({
+    let listaProductosAFiltrar = mesa.Productos;
+    let cesta = req.query.cesta;
+    if(cesta) listaProductosAFiltrar = mesa.Productos.filter(producto => producto.ListaProductosMesa.Estado === 'CESTA')
+
+    const listaProductos = listaProductosAFiltrar.map(producto => ({
         id: producto.ListaProductosMesa.ListaProductosMesaID,
         Producto: producto,
         Cantidad: producto.ListaProductosMesa.Cantidad,
@@ -22,6 +25,16 @@ router.get('/:id', async (req, res) => {
     const mesaMontada = {id: mesa.id, Productos: listaProductos};
 
     res.status(200).json(mesaMontada);
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" + error });
+  }
+});
+
+router.get('/', async (req, res) => {
+  try {
+    const mesas = await Mesas.findAll();
+
+    res.status(200).json(mesas);
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
   }

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import * as api from '../../assets/api.json';
 import { SocketService } from './socket.service';
+import { Mesa } from '../models/mesa';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +40,19 @@ export class APIService {
   async cambiarEstado(id: number, estado: string) {
     const request$ = await this.http.get(`${this.API_URL}/mesas/estado/${id}/?estado=${estado}`);
     await lastValueFrom(request$);
-    setTimeout(() => this.refrescar(), 2000)
+    setTimeout(() => this.refrescar(), 200)
+  }
+
+  // --------------------- MESAS ---------------------
+
+  async getMesas(): Promise<Mesa[]> {
+    const request$ = await this.http.get(`${this.API_URL}/mesas`);
+    return await lastValueFrom(request$) as Mesa[];
+  }
+
+  async getMesa(id: number): Promise<Mesa> {
+    const request$ = await this.http.get(`${this.API_URL}/mesas/${id}`);
+    return await lastValueFrom(request$) as Mesa;
   }
 
   // --------------------- MÉTODOS ---------------------
