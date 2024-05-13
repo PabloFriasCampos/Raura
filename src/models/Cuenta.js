@@ -11,7 +11,7 @@ const Cuenta = db.define('Cuenta', {
     type: DataTypes.DATE
   },
   TotalCuenta: {
-    type: DataTypes.DECIMAL
+    type: DataTypes.DECIMAL(10, 2)
   }
 }, {timestamps: false});
 

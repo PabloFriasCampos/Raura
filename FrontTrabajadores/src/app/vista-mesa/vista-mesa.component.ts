@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Mesa } from '../models/mesa';
 import { APIService } from '../services/api.service';
-import { ActivatedRoute } from '@angular/router';
-import { ListaProductos } from '../models/lista-productos';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -16,7 +15,7 @@ export class VistaMesaComponent implements OnInit {
   mesa: Mesa = new Mesa;
   id: string = '';
 
-  constructor(private api: APIService, private activatedRoute: ActivatedRoute, private toastr: ToastrService) { }
+  constructor(private api: APIService, private activatedRoute: ActivatedRoute, private toastr: ToastrService, private router: Router) { }
 
   async ngOnInit() {
     this.id = await this.activatedRoute.snapshot.paramMap.get('id') || '';
@@ -40,7 +39,8 @@ export class VistaMesaComponent implements OnInit {
         this.toastr.error('No todos los pedidos se han servido')
       } else {
         await this.api.pedirCuenta(this.mesa);
-        this.toastr.success('Cuenta creada')
+        this.toastr.success('Cuenta creada');
+        this.router.navigate(['/camarero'])
       }
     }
   }

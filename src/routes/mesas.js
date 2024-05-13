@@ -7,24 +7,51 @@ const ListaProductosMesa = require('../models/ListaProductosMesa');
 router.get('/:id', async (req, res) => {
   try {
     const id = req.params.id;
-    const mesa = await Mesas.findOne({
-      where: { id: id },
-      include: Productos
+    const mesa = await ListaProductosMesa.findAll({
+      where: { MesaId: id }
     });
 
-    let listaProductosAFiltrar = mesa.Productos;
     let cesta = req.query.cesta;
-    if(cesta) listaProductosAFiltrar = mesa.Productos.filter(producto => producto.ListaProductosMesa.Estado === 'CESTA')
+    const mesaConProductos = {
+      id: id,
+      Productos: []
+    };
 
-    const listaProductos = listaProductosAFiltrar.map(producto => ({
-        id: producto.ListaProductosMesa.ListaProductosMesaID,
-        Producto: producto,
-        Cantidad: producto.ListaProductosMesa.Cantidad,
-        Estado: producto.ListaProductosMesa.Estado
-      }));
-    const mesaMontada = {id: mesa.id, Productos: listaProductos};
+    for (const item of mesa) {
+      const producto = await Productos.findByPk(item.ProductoId);
+      if(cesta && item.Estado === 'CESTA'){
+        mesaConProductos.Productos.push({
+        ListaProductosMesaID: item.ListaProductosMesaID,
+        Cantidad: item.Cantidad,
+        Estado: item.Estado,
+        Producto: {
+          id: producto.id,
+          Nombre: producto.Nombre,
+          Categoria: producto.Categoria,
+          RequiereCocina: producto.RequiereCocina,
+          Precio: producto.Precio,
+          Descripcion: producto.Descripcion
+        }
+      });
+      }else if (!cesta) {
+        mesaConProductos.Productos.push({
+        ListaProductosMesaID: item.ListaProductosMesaID,
+        Cantidad: item.Cantidad,
+        Estado: item.Estado,
+        Producto: {
+          id: producto.id,
+          Nombre: producto.Nombre,
+          Categoria: producto.Categoria,
+          RequiereCocina: producto.RequiereCocina,
+          Precio: producto.Precio,
+          Descripcion: producto.Descripcion
+        }
+      });
+      }
 
-    res.status(200).json(mesaMontada);
+    }
+
+    res.status(200).json(mesaConProductos);
   } catch (error) {
     res.status(500).json({ message: "Internal server error" + error });
   }

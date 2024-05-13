@@ -9,28 +9,42 @@ router.post('/crear', async (req,res) => {
     let productos = req.body.Productos
     let nMesa = req.body.id
 
-    let cuenta = Cuentas.create({
-            NumeroMesa: nMesa,
-            FechaCuenta: Date.now(),
-            TotalCuenta: 0
-          });
+    let cuenta = await Cuentas.create({
+          NumeroMesa: nMesa,
+          FechaCuenta: Date.now(),
+          TotalCuenta: 0
+        });
 
     await cuenta.save();
 
-    productos.forEach(async producto => {
-      let lpc = ListaProductosCuenta.create({
-            ProductoId: producto.id,
-            CuentaId: cuenta.id,
-            Cantidad: producto.Cantidad,
-          });
-          await lpc.save();
-          cuenta.TotalCuenta += producto.Cantidad;
+    const tempProductos = new Map();
+
+    productos.forEach(producto => {
+      const productoId = producto.Producto.id;
+
+      if (tempProductos.has(productoId)) {
+        tempProductos.set(productoId, tempProductos.get(productoId) + producto.Cantidad);
+      } else {
+        tempProductos.set(productoId, producto.Cantidad);
+      }
     });
+
+    for (const [productoId, cantidad] of tempProductos) {
+      let lpc = await ListaProductosCuenta.create({
+        ProductoId: productoId,
+        CuentumId: cuenta.id,
+        Cantidad: cantidad
+      });
+      await lpc.save();
+
+      cuenta.TotalCuenta += cantidad * productos.find(prod => prod.Producto.id === productoId).Producto.Precio;
+    }
+
     await cuenta.save();
 
-    await ListaProductosMesa.destroyAll({
+    await ListaProductosMesa.destroy({
       where: {MesaId: nMesa}
-    })
+    }) 
     res.status(200).json({ message: 'ok'});
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
