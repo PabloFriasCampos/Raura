@@ -114,7 +114,7 @@ router.post('/send', async (req,res) => {
   try {
     let productos = req.body
     productos.forEach(async producto => {
-      let productoMesa = await ListaProductosMesa.findByPk(producto.id);
+      let productoMesa = await ListaProductosMesa.findByPk(producto.ListaProductosMesaID);
       productoMesa.Estado = producto.Producto.RequiereCocina ? 'COCINA' : 'SERVIR';
       await productoMesa.save();
     });
