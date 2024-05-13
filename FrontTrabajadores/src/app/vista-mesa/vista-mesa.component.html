@@ -1,4 +1,17 @@
-<div>Mesa {{mesa.id}}</div>
-<div *ngFor="let producto of mesa.Productos">
-  <div>{{producto.Producto.Nombre}}</div>
+<div class="header">
+  <div>MESA {{mesa.id}}</div>
+</div>
+
+<div *ngFor="let producto of mesa.Productos" class="products">
+  <p [routerLink]="'/producto/' + producto.Producto.id" class="nombre">{{ producto.Producto.Nombre }}</p>
+  <p class="cantidad">{{producto.Estado}}</p>
+  <div class="cantidad">{{producto.Cantidad}} unidades</div>
+  <p class="precio">{{ (producto.Producto.Precio * producto.Cantidad).toFixed(2)}} €</p>
+</div>
+<div class="total">
+    <p>TOTAL:  {{this.total.toFixed(2)}} €</p>
+</div>
+
+<div class="botones">
+  <button class="boton" (click)="pedirCuenta()">PEDIR LA CUENTA</button>
 </div>

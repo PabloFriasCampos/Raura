@@ -4,6 +4,7 @@ import { lastValueFrom } from 'rxjs';
 import * as api from '../../assets/api.json';
 import { SocketService } from './socket.service';
 import { Mesa } from '../models/mesa';
+import { ListaProductos } from '../models/lista-productos';
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +54,14 @@ export class APIService {
   async getMesa(id: number): Promise<Mesa> {
     const request$ = await this.http.get(`${this.API_URL}/mesas/${id}`);
     return await lastValueFrom(request$) as Mesa;
+  }
+
+  // --------------------- CUENTA ---------------------
+
+  async pedirCuenta(mesa: Mesa) {
+    let options = this.getRequestOptions();
+    const request$ = await this.http.post(`${this.API_URL}/cuenta/crear`, JSON.stringify(mesa), options)
+    await lastValueFrom(request$);
   }
 
   // --------------------- MÉTODOS ---------------------

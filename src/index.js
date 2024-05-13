@@ -11,6 +11,7 @@ databaseStart();
 //ROUTES
 const productos = require('./routes/productos');
 const mesas = require('./routes/mesas');
+const cuenta = require('./routes/cuenta');
 const login = require('./routes/login');
 const cocina = require('./connection/cocina');
 
@@ -20,6 +21,7 @@ app.use('/images', express.static(__dirname + '/images'));
 
 app.use('/productos', productos);
 app.use('/mesas', mesas);
+app.use('/cuenta', cuenta);
 app.use('/auth', login);
 
 const server = app.listen(port, () => {
