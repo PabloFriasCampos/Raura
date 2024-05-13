@@ -40,7 +40,7 @@ export class APIService {
   async cambiarEstado(id: number, estado: string) {
     const request$ = await this.http.get(`${this.API_URL}/mesas/estado/${id}/?estado=${estado}`);
     await lastValueFrom(request$);
-    setTimeout(() => this.refrescar(), 200)
+    this.refrescar();
   }
 
   // --------------------- MESAS ---------------------

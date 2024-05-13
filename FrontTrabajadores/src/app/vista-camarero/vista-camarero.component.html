@@ -5,7 +5,7 @@
       <p class="estado" [routerLink]="'/mesa/' + pedido.MesaId">Mesa {{pedido.MesaId}}</p>
       <p class="nombre">{{pedido.Producto.Nombre}}</p>
       <p class="cantidad">{{pedido.Cantidad}} uds</p>
-      <p class="estado">Servido</p>
+      <p class="estado" (click)="cambiarEstadoCamarero(pedido, 'SERVIDO')">Servido</p>
     </div>
   </div>
   <div class="right-side">

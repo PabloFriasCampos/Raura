@@ -4,16 +4,16 @@
     <div *ngFor="let pedido of pedidosCocina" class="pedido">
       <p class="nombre">{{pedido.Producto.Nombre}}</p>
       <p class="cantidad">{{pedido.Cantidad}} uds</p>
-      <p class="estado" (click)="mandarPreparando(pedido)">Mandar a Preparando</p>
+      <p class="estado" (click)="cambiarEstadoCocina(pedido, 'PREPARACION')">Mandar a Preparando</p>
     </div>
   </div>
   <div class="right-side">
     <h1>En preparación</h1>
     <div *ngFor="let pedido of pedidosPreparacion" class="pedido">
-      <p class="estado atras" (click)="atrasCocina(pedido)">Atrás</p>
+      <p class="estado atras" (click)="cambiarEstadoCocina(pedido, 'COCINA')">Atrás</p>
       <p class="nombre">{{pedido.Producto.Nombre}}</p>
       <p class="cantidad">{{pedido.Cantidad}} uds</p>
-      <p class="estado" (click)="mandarServir(pedido)">Mandar a Servir</p>
+      <p class="estado" (click)="cambiarEstadoCocina(pedido, 'SERVIR')">Mandar a Servir</p>
     </div>
   </div>
 </div>

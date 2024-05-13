@@ -39,27 +39,12 @@ export class VistaCocineroComponent implements OnInit {
     this.socketService.cambiarEstado(id, Estado)
   }
 
-  async mandarPreparando(pedido: Pedidos) {
+  async cambiarEstadoCocina(pedido: Pedidos, estado: string) {
     try {
-      await this.api.cambiarEstado(pedido.ListaProductosMesaID, 'PREPARACION');
-    } catch (error) {
-      this.toastr.error('No se pudo modificar el estado')
-      console.log(error)
-    }
-  }
-
-  async atrasCocina(pedido: Pedidos) {
-    try {
-      await this.api.cambiarEstado(pedido.ListaProductosMesaID, 'COCINA');
-    } catch (error) {
-      this.toastr.error('No se pudo modificar el estado')
-      console.log(error)
-    }
-  }
-
-  async mandarServir(pedido: Pedidos) {
-    try {
-      await this.api.cambiarEstado(pedido.ListaProductosMesaID, 'SERVIR');
+      pedido.Estado = estado;
+      this.pedidosCocina = this.pedidos.filter((pedido) => pedido.Estado == 'COCINA');
+      this.pedidosPreparacion = this.pedidos.filter((pedido) => pedido.Estado == 'PREPARACION');
+      await this.api.cambiarEstado(pedido.ListaProductosMesaID, estado);
     } catch (error) {
       this.toastr.error('No se pudo modificar el estado')
       console.log(error)

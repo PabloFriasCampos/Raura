@@ -39,4 +39,15 @@ export class VistaCamareroComponent implements OnInit {
     this.socketService.cambiarEstado(id, Estado)
   }
 
+  async cambiarEstadoCamarero(pedido: Pedidos, estado: string) {
+    try {
+      pedido.Estado = estado;
+      this.pedidosServir = this.pedidos.filter((pedido) => pedido.Estado == 'SERVIR');
+      await this.api.cambiarEstado(pedido.ListaProductosMesaID, estado);
+    } catch (error) {
+      this.toastr.error('No se pudo modificar el estado')
+      console.log(error)
+    }
+  }
+
 }
