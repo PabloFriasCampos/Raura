@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { VistaCocineroComponent } from './vista-cocinero/vista-cocinero.component';
 import { VistaCamareroComponent } from './vista-camarero/vista-camarero.component';
 import { VistaMesaComponent } from './vista-mesa/vista-mesa.component';
+import { VistaAdminComponent } from './vista-admin/vista-admin.component';
 
 
 const routes: Routes = [
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'cocina', component: VistaCocineroComponent },
   { path: 'camarero', component: VistaCamareroComponent },
+  { path: 'admin', component: VistaAdminComponent },
   { path: 'mesa/:id', component: VistaMesaComponent }
 ];
 

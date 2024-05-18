@@ -19,7 +19,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     let JsonWebToken = sessionStorage.getItem('JWT');
-    if (JsonWebToken) this.router.navigate(['/cocina']);
+    if (JsonWebToken) {
+      let rol = this.api.getRoleFromToken();
+      let url = this.getRolUrl(rol);
+      this.router.navigate([url]);
+    }
   }
 
   async login() {
@@ -27,10 +31,20 @@ export class LoginComponent implements OnInit {
       this.JWT = await this.api.login(this.inputEmail, this.inputPassword);
       this.JWT = JSON.parse(this.JWT).token;
       sessionStorage.setItem('JWT', this.JWT);
-      this.router.navigate(['/cocina']);
+      let rol = this.api.getRoleFromToken();
+      let url = this.getRolUrl(rol);
+      this.router.navigate([url]);
     } catch (error) {
       this.toastr.error('Usuario o contraseña incorrectos')
     }
+  }
+
+  getRolUrl(rol: string | null): string {
+    let url = '';
+    if (rol === 'ADMIN') url = '/admin'
+    if (rol === 'COCINERO') url = '/cocina'
+    if (rol === 'CAMARERO') url = '/camarero'
+    return url;
   }
 
 }

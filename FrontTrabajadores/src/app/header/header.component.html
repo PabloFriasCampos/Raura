@@ -1,0 +1,7 @@
+<div class="header">
+  <p>RAURA</p>
+  <div class="button" [routerLink]="'/cocina'" *ngIf="isAdmin">COCINA</div>
+  <div class="button" [routerLink]="'/camarero'" *ngIf="isAdmin">CAMARERO</div>
+  <div class="button" [routerLink]="'/admin'" *ngIf="isAdmin">ADMIN</div>
+  <div class="button" (click)="logout()">CERRAR SESIÓN</div>
+</div>

@@ -4,7 +4,7 @@ import { lastValueFrom } from 'rxjs';
 import * as api from '../../assets/api.json';
 import { SocketService } from './socket.service';
 import { Mesa } from '../models/mesa';
-import { ListaProductos } from '../models/lista-productos';
+import { jwtDecode } from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -83,6 +83,15 @@ export class APIService {
       }),
       responseType: 'text'
     };
+  }
+
+  getRoleFromToken(): string | null {
+    const token = sessionStorage.getItem('JWT');
+    if (token) {
+      const decoded: any = jwtDecode(token);
+      return decoded.Rol;
+    }
+    return null;
   }
 
   refrescar() {

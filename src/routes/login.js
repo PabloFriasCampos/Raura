@@ -12,7 +12,7 @@ router.post("/login", async (req, res) => {
     }
     const trabajador = await Trabajador.findOne({ where: {Correo: Correo, Contrasena: Contrasena}})
     if (trabajador != null && trabajador != undefined) {
-      const token = jwt.sign({ Correo }, secretKey, { expiresIn: "18h" });
+      const token = jwt.sign({ Correo, Rol: trabajador.Rol }, secretKey, { expiresIn: "18h" });
       return res.status(200).json({ token: token });
     } else {
       return res.status(401).json({ message: "Authentication failed" });
@@ -22,7 +22,11 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// TEST
 router.get("/protected", verifyToken, async (req, res) => {
+  return res.status(200).json({ message: "You have access" });
+});
+router.get("/admin", verifyToken, verifyRole('ADMIN'), (req, res) => {
   return res.status(200).json({ message: "You have access" });
 });
 
@@ -34,11 +38,22 @@ function verifyToken(req, res, next) {
   }
   try {
     const payload = jwt.verify(token, secretKey);
-    req.username = payload.username;
+    req.user = payload;
     next();
   } catch (error) {
     return res.status(403).json({ message: "Token not valid" });
   }
+}
+
+function verifyRole(requiredRole) {
+  return (req, res, next) => {
+    const user = req.user;
+    if (user && user.Rol === requiredRole) {
+      next();
+    } else {
+      return res.status(403).json({ message: "Token not valid" });
+    }
+  };
 }
 
 module.exports = router
