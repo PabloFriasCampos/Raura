@@ -5,6 +5,7 @@ import * as api from '../../assets/api.json';
 import { SocketService } from './socket.service';
 import { Mesa } from '../models/mesa';
 import { jwtDecode } from "jwt-decode";
+import { Cuenta } from '../models/cuenta';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class APIService {
   async login(email: string, password: string) {
     let options = this.getRequestOptions();
     const body = { Correo: email, Contrasena: password };
-    const request$ = this.http.post(`${this.API_URL}/auth/login`, JSON.stringify(body), options);
+    const request$ = this.http.post(`http://localhost:3030/auth/login`, JSON.stringify(body), options);
     return await lastValueFrom(request$);
   }
 
@@ -59,9 +60,17 @@ export class APIService {
   // --------------------- CUENTA ---------------------
 
   async pedirCuenta(mesa: Mesa) {
-    let options = this.getRequestOptions();
-    const request$ = await this.http.post(`${this.API_URL}/cuenta/crear`, JSON.stringify(mesa), options)
-    await lastValueFrom(request$);
+    let JWT = sessionStorage.getItem('JWT')
+    if (JWT) {
+      const optionsJWT = this.getRequestOptionsJWT(JWT);
+      const request$ = await this.http.post(`http://localhost:3030/cuenta/crear`, JSON.stringify(mesa), optionsJWT)
+      await lastValueFrom(request$);
+    }
+  }
+
+  async getCuentas(): Promise<Cuenta[]> {
+    const request$ = await this.http.get(`http://localhost:3030/cuenta/`)
+    return await lastValueFrom(request$) as Cuenta[];
   }
 
   // --------------------- MÉTODOS ---------------------

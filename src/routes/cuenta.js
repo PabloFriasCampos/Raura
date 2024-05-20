@@ -1,18 +1,25 @@
 const router = require('express').Router();
 
+const Auth = require('../middleware/auth');
+
 const ListaProductosMesa = require('../models/ListaProductosMesa');
 const Cuentas = require('../models/Cuenta');
 const ListaProductosCuenta = require('../models/ListaProductosCuenta');
+const Trabajador = require('../models/Trabajador');
 
-router.post('/crear', async (req,res) => {
+router.post('/crear', Auth.verifyToken,  async (req,res) => {
   try {
     let productos = req.body.Productos
     let nMesa = req.body.id
+    let correoTrabajador = req.user.Correo
+
+    let trabajador = await Trabajador.findOne({where: { Correo: correoTrabajador }})
 
     let cuenta = await Cuentas.create({
           NumeroMesa: nMesa,
           FechaCuenta: Date.now(),
-          TotalCuenta: 0
+          TotalCuenta: 0,
+          TrabajadorID: trabajador.id
         });
 
     await cuenta.save();
@@ -48,6 +55,16 @@ router.post('/crear', async (req,res) => {
     res.status(200).json({ message: 'ok'});
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
+  }
+})
+
+router.get('/', async (req,res) => {
+  try {
+    const cuentas = await Cuentas.findAll();
+  
+    res.status(200).json(cuentas);
+  } catch (error) {
+    return res.status(500).json({ message: "Internal server error" });
   }
 })
 

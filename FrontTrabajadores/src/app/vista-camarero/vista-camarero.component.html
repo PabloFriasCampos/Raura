@@ -11,9 +11,9 @@
   </div>
   <div class="right-side">
     <h1>Mesas</h1>
-    <div *ngFor="let mesa of mesas" class="pedido" [routerLink]="'/mesa/' + mesa.id">
+    <div *ngFor="let mesa of mesas" class="pedido">
       <p class="nombre">Mesa {{mesa.id}}</p>
-      <p class="estado">Ver detalles</p>
+      <p class="estado" [routerLink]="'/mesa/' + mesa.id">Ver detalles</p>
     </div>
   </div>
 </div>

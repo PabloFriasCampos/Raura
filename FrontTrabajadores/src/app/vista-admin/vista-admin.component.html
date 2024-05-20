@@ -1,2 +1,15 @@
 <app-header></app-header>
-<p>ESTA SERÁ LA VISTA ADMIN</p>
+<div class="container">
+  <div class="left-side">
+    <h1>Ventas</h1>
+    <div class="cuentas" *ngFor="let cuenta of cuentas">
+      <p>{{cuenta.FechaCuenta}}</p>
+      <p>{{cuenta.TotalCuenta}} €</p>
+      <p class="detalles">Ver detalles</p>
+    </div>
+  </div>
+  <div class="right-side">
+      <div class="gestion">PRODUCTOS</div>
+      <div class="gestion">TRABAJADORES</div>
+  </div>
+</div>
