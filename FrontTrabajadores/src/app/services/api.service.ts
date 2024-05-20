@@ -63,13 +63,13 @@ export class APIService {
     let JWT = sessionStorage.getItem('JWT')
     if (JWT) {
       const optionsJWT = this.getRequestOptionsJWT(JWT);
-      const request$ = await this.http.post(`http://localhost:3030/cuenta/crear`, JSON.stringify(mesa), optionsJWT)
+      const request$ = await this.http.post(`${this.API_URL}/cuenta/crear`, JSON.stringify(mesa), optionsJWT)
       await lastValueFrom(request$);
     }
   }
 
   async getCuentas(): Promise<Cuenta[]> {
-    const request$ = await this.http.get(`http://localhost:3030/cuenta/`)
+    const request$ = await this.http.get(`${this.API_URL}/cuenta/`)
     return await lastValueFrom(request$) as Cuenta[];
   }
 
