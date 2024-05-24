@@ -62,6 +62,7 @@ router.post('/crear', Auth.verifyToken,  async (req,res) => {
 router.get('/', async (req,res) => {
   try {
     const cuentas = await Cuentas.findAll();
+    cuentas.reverse();
   
     res.status(200).json(cuentas);
   } catch (error) {
