@@ -5,6 +5,9 @@ import { VistaCocineroComponent } from './vista-cocinero/vista-cocinero.componen
 import { VistaCamareroComponent } from './vista-camarero/vista-camarero.component';
 import { VistaMesaComponent } from './vista-mesa/vista-mesa.component';
 import { VistaAdminComponent } from './vista-admin/vista-admin.component';
+import { VistaCuentaComponent } from './vista-cuenta/vista-cuenta.component';
+import { AdminProductosComponent } from './admin-productos/admin-productos.component';
+import { AdminTrabajadoresComponent } from './admin-trabajadores/admin-trabajadores.component';
 
 
 const routes: Routes = [
@@ -13,7 +16,10 @@ const routes: Routes = [
   { path: 'cocina', component: VistaCocineroComponent },
   { path: 'camarero', component: VistaCamareroComponent },
   { path: 'admin', component: VistaAdminComponent },
-  { path: 'mesa/:id', component: VistaMesaComponent }
+  { path: 'adminProductos', component: AdminProductosComponent },
+  { path: 'adminTrabajadores', component: AdminTrabajadoresComponent },
+  { path: 'mesa/:id', component: VistaMesaComponent },
+  { path: 'cuenta/:id', component: VistaCuentaComponent }
 ];
 
 @NgModule({

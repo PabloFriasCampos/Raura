@@ -1,0 +1,12 @@
+<app-header></app-header>
+<div class="header">
+  <div>FECHA CUENTA: {{this.cuenta.FechaCuenta}}</div>
+</div>
+
+<div *ngFor="let producto of this.cuenta.Productos" class="products">
+  <p class="nombre">{{ producto.Producto.Nombre }}</p>
+  <p class="cantidad">{{ producto.Cantidad }} uds</p>
+</div>
+<div class="total">
+  <p>TOTAL: {{this.cuenta.TotalCuenta}} €</p>
+</div>

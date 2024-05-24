@@ -1,0 +1,36 @@
+.labels {
+  border: 1px solid #550606;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 20px 80px;
+  background-color: #f08e87;
+  display: flex;
+  align-items: center;
+}
+
+.products {
+  border: 1px solid #70eb95;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 20px 80px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  height: 50px;
+}
+
+.nombre {
+  margin-left: 100px;
+  width: 50%;
+}
+
+.correo {
+  width: 30%;
+}

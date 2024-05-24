@@ -25,8 +25,10 @@ export class VistaAdminComponent implements OnInit {
 
       const formattedDate = `${day}/${month}/${year} - ${hours}:${minutes}`;
       return {
+        id: cuenta.id,
         FechaCuenta: formattedDate,
-        TotalCuenta: cuenta.TotalCuenta
+        TotalCuenta: cuenta.TotalCuenta,
+        Productos: []
       }
     });
   }

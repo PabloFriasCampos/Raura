@@ -6,6 +6,8 @@ import { SocketService } from './socket.service';
 import { Mesa } from '../models/mesa';
 import { jwtDecode } from "jwt-decode";
 import { Cuenta } from '../models/cuenta';
+import { Producto } from '../models/producto';
+import { Trabajador } from '../models/trabajador';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +24,7 @@ export class APIService {
   async login(email: string, password: string) {
     let options = this.getRequestOptions();
     const body = { Correo: email, Contrasena: password };
-    const request$ = this.http.post(`http://localhost:3030/auth/login`, JSON.stringify(body), options);
+    const request$ = this.http.post(`${this.API_URL}/auth/login`, JSON.stringify(body), options);
     return await lastValueFrom(request$);
   }
 
@@ -72,6 +74,24 @@ export class APIService {
     const request$ = await this.http.get(`${this.API_URL}/cuenta/`)
     return await lastValueFrom(request$) as Cuenta[];
   }
+
+  async getCuenta(id: string): Promise<Cuenta> {
+    const request$ = await this.http.get(`${this.API_URL}/cuenta/${id}`);
+    return await lastValueFrom(request$) as Cuenta;
+  }
+
+  // --------------------- ADMIN ---------------------
+
+  async getProductosAdmin(): Promise<Producto[]> {
+    const request$ = await this.http.get(`${this.API_URL}/admin/productos`)
+    return await lastValueFrom(request$) as Producto[];
+  }
+
+  async getTrabajadoresAdmin(): Promise<Trabajador[]> {
+    const request$ = await this.http.get(`${this.API_URL}/admin/trabajadores`)
+    return await lastValueFrom(request$) as Trabajador[];
+  }
+
 
   // --------------------- MÉTODOS ---------------------
 

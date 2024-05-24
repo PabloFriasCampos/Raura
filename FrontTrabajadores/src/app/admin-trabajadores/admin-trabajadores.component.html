@@ -1,0 +1,14 @@
+<app-header></app-header>
+<div class="header">
+  TRABAJADORES
+</div>
+<div class="labels">
+    <p class="nombre">Nombre</p>
+    <p class="correo">Correo</p>
+    <p>Rol</p>
+</div>
+<div *ngFor="let trabajador of trabajadores" class="products">
+  <p class="nombre">{{ trabajador.Nombre }}</p>
+  <p class="correo">{{ trabajador.Correo }}</p>
+  <p>{{ trabajador.Rol }}</p> 
+</div>

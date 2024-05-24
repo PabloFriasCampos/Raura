@@ -5,11 +5,11 @@
     <div class="cuentas" *ngFor="let cuenta of cuentas">
       <p>{{cuenta.FechaCuenta}}</p>
       <p>{{cuenta.TotalCuenta}} €</p>
-      <p class="detalles">Ver detalles</p>
+      <p class="detalles" [routerLink]="'/cuenta/' + cuenta.id">Ver detalles</p>
     </div>
   </div>
   <div class="right-side">
-      <div class="gestion">PRODUCTOS</div>
-      <div class="gestion">TRABAJADORES</div>
+      <div class="gestion" [routerLink]="'/adminProductos'">PRODUCTOS</div>
+      <div class="gestion" [routerLink]="'/adminTrabajadores'">TRABAJADORES</div>
   </div>
 </div>

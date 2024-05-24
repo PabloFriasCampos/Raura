@@ -6,6 +6,7 @@ const ListaProductosMesa = require('../models/ListaProductosMesa');
 const Cuentas = require('../models/Cuenta');
 const ListaProductosCuenta = require('../models/ListaProductosCuenta');
 const Trabajador = require('../models/Trabajador');
+const Productos = require('../models/Producto');
 
 router.post('/crear', Auth.verifyToken,  async (req,res) => {
   try {
@@ -64,6 +65,44 @@ router.get('/', async (req,res) => {
   
     res.status(200).json(cuentas);
   } catch (error) {
+    return res.status(500).json({ message: "Internal server error" });
+  }
+})
+
+router.get('/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const productosCuenta = await ListaProductosCuenta.findAll({
+      where: { CuentumId: id }
+    });
+    cuenta = await Cuentas.findByPk(id);
+
+    const cuentaConProductos = {
+      id: id,
+      Productos: [],
+      TotalCuenta: cuenta.TotalCuenta,
+      FechaCuenta: cuenta.FechaCuenta
+    };
+
+      for (const item of productosCuenta) {
+      const producto = await Productos.findByPk(item.ProductoId);
+        cuentaConProductos.Productos.push({
+        ListaProductosCuentaID: item.ListaProductosCuentaID,
+        Cantidad: item.Cantidad,
+        Producto: {
+          id: producto.id,
+          Nombre: producto.Nombre,
+          Categoria: producto.Categoria,
+          RequiereCocina: producto.RequiereCocina,
+          Precio: producto.Precio,
+          Descripcion: producto.Descripcion
+        }
+      });
+    }
+
+    res.status(200).json(cuentaConProductos);
+  } catch (error) {
+    console.log(error)
     return res.status(500).json({ message: "Internal server error" });
   }
 })

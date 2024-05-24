@@ -1,0 +1,22 @@
+.products {
+  border: 1px solid #70eb95;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 20px 80px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.nombre {
+  margin-left: 100px;
+  width: 60%;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  height: 50px;
+}

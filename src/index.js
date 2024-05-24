@@ -13,6 +13,7 @@ const productos = require('./routes/productos');
 const mesas = require('./routes/mesas');
 const cuenta = require('./routes/cuenta');
 const login = require('./routes/login');
+const admin = require('./routes/admin');
 const cocina = require('./connection/cocina');
 
 app.use(express.json());
@@ -23,6 +24,7 @@ app.use('/productos', productos);
 app.use('/mesas', mesas);
 app.use('/cuenta', cuenta);
 app.use('/auth', login);
+app.use('/admin', admin);
 
 const server = app.listen(port, () => {
   console.log('Servidor ejecutándose en el puerto: ', port)
