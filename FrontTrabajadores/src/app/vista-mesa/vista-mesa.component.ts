@@ -18,6 +18,10 @@ export class VistaMesaComponent implements OnInit {
   constructor(private api: APIService, private activatedRoute: ActivatedRoute, private toastr: ToastrService, private router: Router) { }
 
   async ngOnInit() {
+    let rol = this.api.getRoleFromToken();
+    if (rol === null) this.router.navigate(['/login'])
+    if (rol === 'COCINERO') this.router.navigate(['/cocina'])
+
     this.id = await this.activatedRoute.snapshot.paramMap.get('id') || '';
     this.mesa = await this.api.getMesa(+this.id) as Mesa;
     this.calcularTotal();

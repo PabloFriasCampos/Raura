@@ -3,6 +3,7 @@ import { SocketService } from '../services/socket.service';
 import { Pedidos } from '../models/pedidos';
 import { APIService } from '../services/api.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vista-cocinero',
@@ -15,9 +16,13 @@ export class VistaCocineroComponent implements OnInit {
   pedidosCocina: Pedidos[] = [];
   pedidosPreparacion: Pedidos[] = []
 
-  constructor(private socketService: SocketService, private api: APIService, private toastr: ToastrService) { }
+  constructor(private socketService: SocketService, private api: APIService, private toastr: ToastrService, private router: Router) { }
 
   ngOnInit() {
+    let rol = this.api.getRoleFromToken();
+    if (rol === null) this.router.navigate(['/login'])
+    if (rol === 'CAMARERO') this.router.navigate(['/camarero'])
+
     this.socketService.getAllPedidos().subscribe((data: Pedidos[]) => {
       this.pedidos = data as Pedidos[];
       this.pedidosCocina = this.pedidos.filter((pedido) => pedido.Estado == 'COCINA');

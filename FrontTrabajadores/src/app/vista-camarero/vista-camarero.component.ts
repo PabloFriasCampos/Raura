@@ -4,6 +4,7 @@ import { SocketService } from '../services/socket.service';
 import { APIService } from '../services/api.service';
 import { ToastrService } from 'ngx-toastr';
 import { Mesa } from '../models/mesa';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vista-camarero',
@@ -16,9 +17,13 @@ export class VistaCamareroComponent implements OnInit {
   pedidosServir: Pedidos[] = [];
   mesas: Mesa[] = [];
 
-  constructor(private socketService: SocketService, private api: APIService, private toastr: ToastrService) { }
+  constructor(private socketService: SocketService, private api: APIService, private toastr: ToastrService, private router: Router) { }
 
   async ngOnInit() {
+    let rol = this.api.getRoleFromToken();
+    if (rol === null) this.router.navigate(['/login'])
+    if (rol === 'COCINERO') this.router.navigate(['/cocina'])
+
     this.socketService.getAllPedidos().subscribe((data: Pedidos[]) => {
       this.pedidos = data as Pedidos[];
       this.pedidosServir = this.pedidos.filter((pedido) => pedido.Estado == 'SERVIR');
