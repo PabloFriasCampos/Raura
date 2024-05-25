@@ -36,17 +36,17 @@ export class APIService {
 
   async addToMesa(producto: Producto, cantidad: number, mesaId: string) {
     let options = this.getRequestOptions();
-    const request$ = await this.http.post(`http://localhost:3030/mesas/add/${mesaId}?cantidad=${cantidad}`, JSON.stringify(producto), options)
+    const request$ = await this.http.post(`${this.API_URL}/mesas/add/${mesaId}?cantidad=${cantidad}`, JSON.stringify(producto), options)
     await lastValueFrom(request$);
   }
 
   async getMesa(id: string): Promise<Mesa> {
-    const request$ = await this.http.get(`${this.API_URL}/mesas/${id}?cesta=1`);
+    const request$ = await this.http.get(`http://localhost:3030/mesas/${id}?cesta=1`);
     return await lastValueFrom(request$) as Mesa;
   }
 
   async changeCantidad(total: number, id: number) {
-    const request$ = await this.http.get(`http://localhost:3030/mesas/cantidad/${id}?cantidad=${total}`);
+    const request$ = await this.http.get(`${this.API_URL}/mesas/cantidad/${id}?cantidad=${total}`);
     await lastValueFrom(request$);
   }
 

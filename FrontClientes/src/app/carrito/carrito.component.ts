@@ -27,7 +27,6 @@ export class CarritoComponent {
 
   async changeCantidad(dif: number, producto: ListaProductos) {
     producto.Cantidad += dif;
-    console.log('hola: ', producto)
     await this.api.changeCantidad(producto.Cantidad, producto.ListaProductosMesaID);
     if (producto.Cantidad <= 0) {
       this.mesa.Productos.splice(this.mesa.Productos.indexOf(producto), 1)

@@ -16,6 +16,7 @@ export class ListaProductosComponent implements OnInit {
   productosMostrados: Producto[] = [];
   inicio: boolean = true;
   id: string = '';
+  showId: string = '';
   sqids: Sqids = new Sqids()
 
   constructor(private api: APIService, private activatedRoute: ActivatedRoute, private router: Router) { }
@@ -28,7 +29,7 @@ export class ListaProductosComponent implements OnInit {
     } else {
       sessionStorage.setItem('id', this.id)
     }
-    this.id = this.sqids.decode(this.id)[0].toString();
+    this.showId = this.sqids.decode(this.id)[0].toString();
     this.productosXCategoria = await this.api.getProductos() as ProductosXCategoria[];
   }
 
