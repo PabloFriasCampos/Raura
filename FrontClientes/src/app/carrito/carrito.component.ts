@@ -20,14 +20,15 @@ export class CarritoComponent {
   async ngOnInit(): Promise<void> {
     const id = await this.activatedRoute.snapshot.paramMap.get('id');
     if (id) {
-      this.mesa = await this.api.getMesa(+id);
+      this.mesa = await this.api.getMesa(id);
       this.calcularTotal()
     }
   }
 
   async changeCantidad(dif: number, producto: ListaProductos) {
     producto.Cantidad += dif;
-    await this.api.changeCantidad(producto.Cantidad, producto.id);
+    console.log('hola: ', producto)
+    await this.api.changeCantidad(producto.Cantidad, producto.ListaProductosMesaID);
     if (producto.Cantidad <= 0) {
       this.mesa.Productos.splice(this.mesa.Productos.indexOf(producto), 1)
     }

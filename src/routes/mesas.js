@@ -3,10 +3,15 @@ const router = require('express').Router();
 const Productos = require('../models/Producto')
 const Mesas = require('../models/Mesa')
 const ListaProductosMesa = require('../models/ListaProductosMesa');
+const { default: Sqids } = require('sqids');
+
+const sqids = new Sqids({
+  minLength: 12,
+})
 
 router.get('/:id', async (req, res) => {
   try {
-    const id = req.params.id;
+    const id = sqids.decode(req.params.id)[0];
     const mesa = await ListaProductosMesa.findAll({
       where: { MesaId: id }
     });
@@ -69,11 +74,13 @@ router.get('/', async (req, res) => {
 
 router.post('/add/:id', async (req,res) => {
   try {
+    const mesaId = sqids.decode(req.params.id)[0]
+    console.log(mesaId)
     const producto = await Productos.findByPk(req.body.id)
     const yaExiste = await ListaProductosMesa.findOne({
         where: {
           ProductoId: producto.id,
-          MesaId: req.params.id,
+          MesaId: mesaId,
           Estado: 'CESTA'
         }
       });
@@ -83,20 +90,21 @@ router.post('/add/:id', async (req,res) => {
     }else{
       await ListaProductosMesa.create({
             ProductoId: producto.id,
-            MesaId: req.params.id,
+            MesaId: mesaId,
             Cantidad: +req.query.cantidad,
             Estado: 'CESTA'
           });
     }
     res.status(200).json({ message: 'ok'});
   } catch (error) {
+    console.log(error)
     res.status(500).json({ message: error });
   }
 })
 
 router.get('/cantidad/:id', async (req,res) => {
   try {
-    const productoMesa = await ListaProductosMesa.findByPk(req.params.id);
+    const productoMesa = await ListaProductosMesa.findByPk( req.params.id);
     productoMesa.Cantidad = +req.query.cantidad;
     if(productoMesa.Cantidad == 0){
       await productoMesa.destroy()
@@ -106,6 +114,7 @@ router.get('/cantidad/:id', async (req,res) => {
 
     res.status(200).json({ message: 'ok'});
   } catch (error) {
+    console.log(error)
     res.status(500).json({ message: "Internal server error" });
   }
 })

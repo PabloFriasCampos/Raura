@@ -3,6 +3,7 @@ import { APIService } from '../services/api.service';
 import { ProductosXCategoria } from '../models/productos-xcategoria';
 import { Producto } from '../models/producto';
 import { ActivatedRoute, Router } from '@angular/router';
+import Sqids from 'sqids';
 
 @Component({
   selector: 'app-lista-productos',
@@ -15,6 +16,7 @@ export class ListaProductosComponent implements OnInit {
   productosMostrados: Producto[] = [];
   inicio: boolean = true;
   id: string = '';
+  sqids: Sqids = new Sqids()
 
   constructor(private api: APIService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
@@ -26,6 +28,7 @@ export class ListaProductosComponent implements OnInit {
     } else {
       sessionStorage.setItem('id', this.id)
     }
+    this.id = this.sqids.decode(this.id)[0].toString();
     this.productosXCategoria = await this.api.getProductos() as ProductosXCategoria[];
   }
 

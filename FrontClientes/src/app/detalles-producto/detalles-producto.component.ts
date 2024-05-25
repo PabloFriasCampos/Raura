@@ -28,7 +28,7 @@ export class DetallesProductoComponent implements OnInit {
 
   async addToMesa() {
     try {
-      await this.api.addToMesa(this.producto, this.cantidad, +this.id);
+      await this.api.addToMesa(this.producto, this.cantidad, this.id);
       this.toastr.info('Añadido a la cesta')
       this.router.navigate(['/mesa/' + this.id])
     } catch (error) {
