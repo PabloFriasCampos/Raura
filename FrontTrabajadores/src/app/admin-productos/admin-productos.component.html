@@ -3,5 +3,19 @@
   PRODUCTOS
 </div>
 <div *ngFor="let producto of productos" class="products">
-  <p class="nombre">{{ producto.Nombre }}</p>
+  <p class="nombre" *ngIf="!producto.editing">{{ producto.Nombre }}</p>
+  <input *ngIf="producto.editing" [(ngModel)]="producto.Nombre" class="nombre" />
+
+  <p class="categoria" *ngIf="!producto.editing">{{ producto.Categoria }}</p>
+  <input *ngIf="producto.editing" [(ngModel)]="producto.Categoria" class="categoria" />
+
+  <p *ngIf="!producto.editing">{{ producto.Precio }} €</p>
+  <input *ngIf="producto.editing" [(ngModel)]="producto.Precio" type="number" class="precio" />
+
+  <button *ngIf="producto.editing" class="guardar" (click)="saveProducto(producto)">Guardar</button>
+  <button *ngIf="producto.editing" class="cancelar" (click)="cancelEdit(producto)">Cancelar</button>
+  <button *ngIf="!producto.editing" class="editar" (click)="editProducto(producto)">Editar</button>
+</div>
+<div class="add-button-container">
+  <button class="add" (click)="newProducto()">Añadir Producto</button>
 </div>

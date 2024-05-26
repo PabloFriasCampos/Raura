@@ -2,13 +2,25 @@
 <div class="header">
   TRABAJADORES
 </div>
-<div class="labels">
-    <p class="nombre">Nombre</p>
-    <p class="correo">Correo</p>
-    <p>Rol</p>
-</div>
 <div *ngFor="let trabajador of trabajadores" class="products">
-  <p class="nombre">{{ trabajador.Nombre }}</p>
-  <p class="correo">{{ trabajador.Correo }}</p>
-  <p>{{ trabajador.Rol }}</p> 
+  <p class="nombre" *ngIf="!trabajador.editing">{{ trabajador.Nombre }}</p>
+  <input *ngIf="trabajador.editing" [(ngModel)]="trabajador.Nombre" class="nombre" />
+
+  <p class="correo" *ngIf="!trabajador.editing">{{ trabajador.Correo }}</p>
+  <input *ngIf="trabajador.editing" [(ngModel)]="trabajador.Correo" class="correo" />
+
+  <p class="rol" *ngIf="!trabajador.editing">{{ trabajador.Rol }}</p>
+  <select *ngIf="trabajador.editing" [(ngModel)]="trabajador.Rol" class="rol">
+    <option value="COCINERO">COCINERO</option>
+    <option value="CAMARERO">CAMARERO</option>
+    <option value="ADMIN">ADMIN</option>
+  </select>
+
+  <button *ngIf="trabajador.editing" class="guardar" (click)="saveTrabajador(trabajador)">Guardar</button>
+  <button *ngIf="trabajador.editing" class="cancelar" (click)="cancelEdit(trabajador)">Cancelar</button>
+  <button *ngIf="!trabajador.editing" class="editar" (click)="editTrabajador(trabajador)">Editar</button>
+</div>
+
+<div class="add-button-container">
+  <button class="add" (click)="newTrabajador()">Añadir Trabajador</button>
 </div>

@@ -6,11 +6,16 @@
   background-color: #fff;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .nombre {
-  margin-left: 100px;
-  width: 60%;
+  margin-left: 10px;
+  width: 30%;
+}
+
+.categoria {
+  width: 20%;
 }
 
 .header {
@@ -19,4 +24,92 @@
   align-items: center;
   font-size: 1.5em;
   height: 50px;
+}
+
+input.nombre,
+input.categoria,
+input.precio {
+  border: 1px solid #70eb95;
+  border-radius: 5px;
+  padding: 5px;
+  transition: border-color 0.3s ease;
+  font-size: 1em;
+  margin-right: 10px;
+}
+
+input.nombre {
+  width: 30%;
+}
+
+input.categoria {
+  width: 20%;
+}
+
+input.precio {
+  width: 10%;
+}
+
+input.nombre:focus,
+input.categoria:focus,
+input.precio:focus {
+  border-color: #56c876;
+  outline: none;
+}
+
+button.guardar,
+button.editar,
+button.cancelar,
+button.add {
+  border: none;
+  border-radius: 5px;
+  padding: 5px 15px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1em;
+  margin-left: 10px;
+}
+
+button.guardar {
+  background-color: #70eb95;
+}
+
+button.guardar:hover {
+  background-color: #56c876;
+}
+
+button.editar {
+  background-color: #ffaa00;
+}
+
+button.editar:hover {
+  background-color: #e69500;
+}
+
+button.cancelar {
+  background-color: #ff4c4c;
+}
+
+button.cancelar:hover {
+  background-color: #e04040;
+}
+
+button.add {
+  background-color: #008cba;
+}
+
+button.add:hover {
+  background-color: #007399;
+}
+
+button.guardar:focus,
+button.editar:focus,
+button.cancelar:focus {
+  outline: none;
+}
+
+.add-button-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 80px;
 }

@@ -17,7 +17,7 @@ router.get('/productos', async (req,res) => {
 router.get('/trabajadores', async (req,res) => {
   try {
     const trabajadores = await Trabajadores.findAll({
-      attributes: ['Nombre', 'Correo', 'Rol']
+      attributes: ['id', 'Nombre', 'Correo', 'Rol']
     });
   
     res.status(200).json(trabajadores);

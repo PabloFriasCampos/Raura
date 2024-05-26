@@ -11,16 +11,36 @@ import { Router } from '@angular/router';
 export class AdminProductosComponent implements OnInit {
 
   productos: Producto[] = [];
+  productosBackup: { [id: number]: Producto } = {};
 
   constructor(private api: APIService, private router: Router) { }
 
   async ngOnInit() {
     let rol = this.api.getRoleFromToken();
-    if (rol === null) this.router.navigate(['/login'])
-    if (rol === 'COCINERO') this.router.navigate(['/cocina'])
-    if (rol === 'CAMARERO') this.router.navigate(['/camarero'])
+    if (rol === null) this.router.navigate(['/login']);
+    if (rol === 'COCINERO') this.router.navigate(['/cocina']);
+    if (rol === 'CAMARERO') this.router.navigate(['/camarero']);
 
     this.productos = await this.api.getProductosAdmin();
+    this.productos.forEach(producto => producto.editing = false);
   }
 
+  editProducto(producto: Producto) {
+    this.productosBackup[producto.id] = { ...producto };
+    producto.editing = true;
+  }
+
+  cancelEdit(producto: Producto) {
+    const id = producto.id;
+    this.productos = this.productos.map(p => p.id === id ? { ...this.productosBackup[id], editing: false } : p);
+    delete this.productosBackup[id];
+  }
+
+  async saveProducto(producto: Producto) {
+    producto.editing = false;
+    //await this.api.updateProducto(producto);
+    delete this.productosBackup[producto.id];
+  }
+
+  async newProducto() { }
 }

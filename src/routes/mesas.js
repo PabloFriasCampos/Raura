@@ -11,12 +11,14 @@ const sqids = new Sqids({
 
 router.get('/:id', async (req, res) => {
   try {
-    const id = sqids.decode(req.params.id)[0];
+    let cesta = req.query.cesta;
+    let id
+    if(cesta) id = sqids.decode(req.params.id)[0];
+    if(!cesta) id = req.params.id
     const mesa = await ListaProductosMesa.findAll({
       where: { MesaId: id }
     });
 
-    let cesta = req.query.cesta;
     const mesaConProductos = {
       id: id,
       Productos: []
