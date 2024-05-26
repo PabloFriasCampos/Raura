@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Trabajador } from '../models/trabajador';
 import { APIService } from '../services/api.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-admin-trabajadores',
@@ -13,7 +14,7 @@ export class AdminTrabajadoresComponent implements OnInit {
   trabajadores: Trabajador[] = [];
   trabajadoresBackup: { [id: number]: Trabajador } = {};
 
-  constructor(private api: APIService, private router: Router) { }
+  constructor(private api: APIService, private router: Router, private toastr: ToastrService) { }
 
   async ngOnInit() {
     let rol = this.api.getRoleFromToken();
@@ -38,7 +39,9 @@ export class AdminTrabajadoresComponent implements OnInit {
 
   async saveTrabajador(trabajador: Trabajador) {
     trabajador.editing = false;
-    //await this.api.updateTrabajador(trabajador);
+    let result = await this.api.updateTrabajador(trabajador);
+    if (result != null) this.toastr.success('Trabajador actualizado')
+    if (result == null) this.toastr.error('Error actualizando trabajador')
     delete this.trabajadoresBackup[trabajador.id];
   }
 

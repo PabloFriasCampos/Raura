@@ -81,6 +81,26 @@ export class APIService {
     return await lastValueFrom(request$) as Trabajador[];
   }
 
+  async updateTrabajador(trabajador: Trabajador) {
+    let JWT = sessionStorage.getItem('JWT')
+    if (JWT) {
+      const optionsJWT = this.getRequestOptionsJWT(JWT);
+      const request$ = await this.http.put(`${this.API_URL}/admin/trabajador`, JSON.stringify(trabajador), optionsJWT)
+      return await lastValueFrom(request$);
+    }
+    return null;
+  }
+
+  async updateProducto(producto: Producto) {
+    let JWT = sessionStorage.getItem('JWT')
+    if (JWT) {
+      const optionsJWT = this.getRequestOptionsJWT(JWT);
+      const request$ = await this.http.put(`${this.API_URL}/admin/producto`, JSON.stringify(producto), optionsJWT)
+      return await lastValueFrom(request$);
+    }
+    return null;
+  }
+
 
   // --------------------- MÉTODOS ---------------------
 

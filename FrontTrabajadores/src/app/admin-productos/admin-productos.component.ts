@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Producto } from '../models/producto';
 import { APIService } from '../services/api.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-admin-productos',
@@ -13,7 +14,7 @@ export class AdminProductosComponent implements OnInit {
   productos: Producto[] = [];
   productosBackup: { [id: number]: Producto } = {};
 
-  constructor(private api: APIService, private router: Router) { }
+  constructor(private api: APIService, private router: Router, private toastr: ToastrService) { }
 
   async ngOnInit() {
     let rol = this.api.getRoleFromToken();
@@ -38,7 +39,9 @@ export class AdminProductosComponent implements OnInit {
 
   async saveProducto(producto: Producto) {
     producto.editing = false;
-    //await this.api.updateProducto(producto);
+    let result = await this.api.updateProducto(producto);
+    if (result != null) this.toastr.success('Producto actualizado')
+    if (result == null) this.toastr.error('Error actualizando producto')
     delete this.productosBackup[producto.id];
   }
 
