@@ -22,6 +22,7 @@ router.get('/', async (req,res) => {
   
     res.status(200).json(productosAgrupados);
   } catch (error) {
+    console.log(error)
     return res.status(500).json({ message: "Internal server error" });
   }
 })
@@ -32,6 +33,7 @@ router.get('/:id', async (req,res) => {
     const producto = await Productos.findByPk(id)
     res.status(200).json(producto)
   } catch (error) {
+    console.log(error)
     return res.status(500).json({ message: "Internal server error" });
   }
 })

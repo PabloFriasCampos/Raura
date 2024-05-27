@@ -45,5 +45,4 @@ export class AdminProductosComponent implements OnInit {
     delete this.productosBackup[producto.id];
   }
 
-  async newProducto() { }
 }

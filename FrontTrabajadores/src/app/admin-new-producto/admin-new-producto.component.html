@@ -1,0 +1,27 @@
+<app-header></app-header>
+<div class="header">CREAR PRODUCTO</div>
+<form class="formulario">
+  <div class="form-field">
+    <label for="nombre">Nombre:</label>
+    <input type="text" name="nombre" class="nombre" [(ngModel)]="producto.Nombre">
+  </div>
+  <div class="form-field">
+    <label for="categoria">Categoría:</label>
+    <input type="text" name="categoria" class="categoria" [(ngModel)]="producto.Categoria">
+  </div>
+  <div class="form-field">
+    <label for="requiereCocina">Requiere Cocina:</label>
+    <input type="checkbox" name="requiereCocina" class="requiereCocina" [(ngModel)]="producto.RequiereCocina">
+  </div>
+  <div class="form-field">
+    <label for="precio">Precio:</label>
+    <input type="number" name="precio" class="precio" step="1" [(ngModel)]="producto.Precio">
+  </div>
+  <div class="form-field">
+    <label for="descripcion">Descripción:</label>
+    <textarea name="descripcion" class="descripcion" [(ngModel)]="producto.Descripcion"></textarea>
+  </div>
+  <div class="form-actions">
+    <button class="guardar" (click)="saveNewProducto()">Guardar</button>
+  </div>
+</form>

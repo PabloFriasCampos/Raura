@@ -65,4 +65,41 @@ router.put('/producto', Auth.verifyToken, Auth.verifyRole('ADMIN'), async (req,r
   }
 })
 
+router.post('/create/trabajador', Auth.verifyToken, Auth.verifyRole('ADMIN'), async (req,res) => {
+  try {
+    const { Nombre, Correo, Contrasena, Rol} = req.body;
+
+    await Trabajadores.create({
+      Nombre: Nombre,
+      Contrasena: Contrasena, 
+      Correo: Correo,
+      Rol: Rol
+    });
+  
+    res.status(200).json({ message: 'ok'});
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json({ message: "Internal server error" });
+  }
+})
+
+router.post('/create/producto', Auth.verifyToken, Auth.verifyRole('ADMIN'), async (req,res) => {
+  try {
+    const { Nombre, Categoria, RequiereCocina, Precio, Descripcion} = req.body;
+
+    await Productos.create({
+      Nombre: Nombre,
+      Categoria: Categoria, 
+      RequiereCocina: RequiereCocina,
+      Precio: Precio,
+      Descripcion: Descripcion
+    });
+  
+    res.status(200).json({ message: 'ok'});
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json({ message: "Internal server error" });
+  }
+})
+
 module.exports = router

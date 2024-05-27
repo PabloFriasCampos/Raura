@@ -17,5 +17,5 @@
   <button *ngIf="!producto.editing" class="editar" (click)="editProducto(producto)">Editar</button>
 </div>
 <div class="add-button-container">
-  <button class="add" (click)="newProducto()">Añadir Producto</button>
+  <button class="add" [routerLink]="'/newProducto'">Añadir Producto</button>
 </div>

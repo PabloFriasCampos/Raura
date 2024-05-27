@@ -70,6 +70,7 @@ router.get('/', async (req, res) => {
 
     res.status(200).json(mesas);
   } catch (error) {
+    console.log(error)
     res.status(500).json({ message: "Internal server error" });
   }
 });
@@ -142,6 +143,7 @@ router.get('/estado/:id', async (req,res) => {
     await productoMesa.save();
     res.status(200).json({ message: 'ok'});
   } catch (error) {
+    console.log(error)
     res.status(500).json({ message: "Internal server error" });
   }
 })

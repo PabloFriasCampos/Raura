@@ -8,6 +8,8 @@ import { VistaAdminComponent } from './vista-admin/vista-admin.component';
 import { VistaCuentaComponent } from './vista-cuenta/vista-cuenta.component';
 import { AdminProductosComponent } from './admin-productos/admin-productos.component';
 import { AdminTrabajadoresComponent } from './admin-trabajadores/admin-trabajadores.component';
+import { AdminNewTrabajadorComponent } from './admin-new-trabajador/admin-new-trabajador.component';
+import { AdminNewProductoComponent } from './admin-new-producto/admin-new-producto.component';
 
 
 const routes: Routes = [
@@ -19,7 +21,9 @@ const routes: Routes = [
   { path: 'adminProductos', component: AdminProductosComponent },
   { path: 'adminTrabajadores', component: AdminTrabajadoresComponent },
   { path: 'mesa/:id', component: VistaMesaComponent },
-  { path: 'cuenta/:id', component: VistaCuentaComponent }
+  { path: 'cuenta/:id', component: VistaCuentaComponent },
+  { path: 'newTrabajador', component: AdminNewTrabajadorComponent },
+  { path: 'newProducto', component: AdminNewProductoComponent }
 ];
 
 @NgModule({

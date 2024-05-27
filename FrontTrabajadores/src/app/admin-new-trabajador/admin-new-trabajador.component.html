@@ -1,0 +1,29 @@
+<app-header></app-header>
+<div class="header">
+  CREAR TRABAJADOR
+</div>
+<form class="formulario">
+  <div class="form-field">
+    <label for="nombre">Nombre:</label>
+    <input type="text" name="nombre" class="nombre" [(ngModel)]="trabajador.Nombre">
+  </div>
+  <div class="form-field">
+    <label for="correo">Correo:</label>
+    <input type="email" name="correo" class="correo" [(ngModel)]="trabajador.Correo">
+  </div>
+  <div class="form-field">
+    <label for="password">Contraseña:</label>
+    <input type="password" name="password" class="password" [(ngModel)]="trabajador.Contrasena">
+  </div>
+  <div class="form-field">
+    <label for="rol">Rol:</label>
+    <select name="rol" class="rol" [(ngModel)]="trabajador.Rol">
+      <option value="ADMIN">ADMIN</option>
+      <option value="CAMARERO">CAMARERO</option>
+      <option value="COCINERO">COCINERO</option>
+    </select>
+  </div>
+  <div class="form-actions">
+    <button class="guardar" (click)="saveNewTrabajador()">Guardar</button>
+  </div>
+</form>

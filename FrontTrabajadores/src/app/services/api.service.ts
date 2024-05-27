@@ -101,6 +101,26 @@ export class APIService {
     return null;
   }
 
+  async saveNewTrabajador(trabajador: Trabajador) {
+    let JWT = sessionStorage.getItem('JWT')
+    if (JWT) {
+      const optionsJWT = this.getRequestOptionsJWT(JWT);
+      const request$ = await this.http.post(`${this.API_URL}/admin/create/trabajador`, JSON.stringify(trabajador), optionsJWT)
+      return await lastValueFrom(request$);
+    }
+    return null;
+  }
+
+  async saveNewProducto(producto: Producto) {
+    let JWT = sessionStorage.getItem('JWT')
+    if (JWT) {
+      const optionsJWT = this.getRequestOptionsJWT(JWT);
+      const request$ = await this.http.post(`${this.API_URL}/admin/create/producto`, JSON.stringify(producto), optionsJWT)
+      return await lastValueFrom(request$);
+    }
+    return null;
+  }
+
 
   // --------------------- MÉTODOS ---------------------
 

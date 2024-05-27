@@ -3,5 +3,6 @@ export class Trabajador {
   Nombre: string = '';
   Correo: string = '';
   Rol: string = '';
+  Contrasena: string = '';
   editing: boolean = false;
 }

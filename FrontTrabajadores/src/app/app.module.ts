@@ -16,6 +16,8 @@ import { VistaAdminComponent } from './vista-admin/vista-admin.component';
 import { VistaCuentaComponent } from './vista-cuenta/vista-cuenta.component';
 import { AdminProductosComponent } from './admin-productos/admin-productos.component';
 import { AdminTrabajadoresComponent } from './admin-trabajadores/admin-trabajadores.component';
+import { AdminNewTrabajadorComponent } from './admin-new-trabajador/admin-new-trabajador.component';
+import { AdminNewProductoComponent } from './admin-new-producto/admin-new-producto.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { AdminTrabajadoresComponent } from './admin-trabajadores/admin-trabajado
     VistaAdminComponent,
     VistaCuentaComponent,
     AdminProductosComponent,
-    AdminTrabajadoresComponent
+    AdminTrabajadoresComponent,
+    AdminNewTrabajadorComponent,
+    AdminNewProductoComponent
   ],
   imports: [
     BrowserModule,

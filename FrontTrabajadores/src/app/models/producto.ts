@@ -5,5 +5,6 @@ export class Producto {
   Disponible: boolean = true;
   Precio: number = 0;
   Descripcion: string = '';
+  RequiereCocina: boolean = false;
   editing: boolean = false;
 }

@@ -1,0 +1,88 @@
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  height: 50px;
+}
+
+.formulario {
+  border: 1px solid #70eb95;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 20px 80px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.form-field label {
+  margin-right: 10px;
+  width: 20%;
+  font-size: 1em;
+}
+
+input.nombre,
+input.categoria,
+input.precio,
+textarea.descripcion {
+  border: 1px solid #70eb95;
+  border-radius: 5px;
+  padding: 5px;
+  transition: border-color 0.3s ease;
+  font-size: 1em;
+  width: 100%;
+}
+
+input.requiereCocina {
+  margin-right: 10px;
+}
+
+input.nombre,
+input.categoria,
+input.precio,
+textarea.descripcion {
+  margin-right: 10px;
+}
+
+input.nombre:focus,
+input.categoria:focus,
+input.precio:focus,
+textarea.descripcion:focus {
+  border-color: #56c876;
+  outline: none;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+button.guardar {
+  border: none;
+  border-radius: 5px;
+  padding: 5px 15px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1em;
+  margin-left: 10px;
+}
+
+button.guardar {
+  background-color: #70eb95;
+}
+
+button.guardar:hover {
+  background-color: #56c876;
+}
+
+button.guardar:focus {
+  outline: none;
+}
