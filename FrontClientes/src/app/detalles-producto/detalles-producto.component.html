@@ -1,3 +1,6 @@
+<div class="spinner-container" id="spinner" *ngIf="loading">
+  <div class="spinner"></div>
+</div>
 <button class="back-button" [routerLink]="'/mesa/' + id">BACK</button>
 <div class="container">
   <h2 class="titulo">{{producto.Nombre}}</h2>

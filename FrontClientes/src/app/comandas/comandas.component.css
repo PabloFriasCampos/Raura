@@ -1,0 +1,33 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2em;
+  margin-bottom: 5px;
+  height: 50px;
+}
+
+.back-button {
+  padding: 6px;
+  cursor: pointer;
+  border: none;
+  background-color: #bb1e13;
+  color: #f3faee;
+  border-radius: 5px;
+  font-family: 'Ginerin';
+}
+
+.products {
+  font-size: 12px;
+  border: 1px solid #70eb95;
+  border-radius: 5px;
+  margin-top: 10px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.nombre {
+  margin-left: 10px;
+  width: 65%;
+}

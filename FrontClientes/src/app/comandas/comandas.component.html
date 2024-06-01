@@ -1,0 +1,9 @@
+<div class="header">
+  <button class="back-button" [routerLink]="'/mesa/' + mesa.id">BACK</button>
+  <div>MESA {{mesa.id}}</div>
+</div>
+
+<div *ngFor="let producto of mesa.Productos" class="products">
+  <p [routerLink]="'/producto/' + producto.Producto.id" class="nombre">{{producto.Cantidad}}x {{ producto.Producto.Nombre }}</p>
+  <p>{{producto.Estado}}</p>
+</div>

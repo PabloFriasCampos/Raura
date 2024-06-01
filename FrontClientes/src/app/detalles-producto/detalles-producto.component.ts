@@ -14,7 +14,8 @@ export class DetallesProductoComponent implements OnInit {
   producto: Producto = new Producto();
   imageUrl: string = '';
   cantidad = 1;
-  id = sessionStorage.getItem('id') || '0'
+  id = sessionStorage.getItem('id') || '0';
+  loading: boolean = false;
 
   constructor(private api: APIService, private activatedRoute: ActivatedRoute, private toastr: ToastrService, private router: Router) { }
 
@@ -28,10 +29,13 @@ export class DetallesProductoComponent implements OnInit {
 
   async addToMesa() {
     try {
+      this.loading = true;
       await this.api.addToMesa(this.producto, this.cantidad, this.id);
+      this.loading = false;
       this.toastr.info('Añadido a la cesta')
       this.router.navigate(['/mesa/' + this.id])
     } catch (error) {
+      this.loading = false;
       this.toastr.error('No se pudo añadir a la cesta')
       console.log(error)
     }

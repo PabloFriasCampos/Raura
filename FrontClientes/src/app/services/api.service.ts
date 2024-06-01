@@ -45,6 +45,11 @@ export class APIService {
     return await lastValueFrom(request$) as Mesa;
   }
 
+  async getComandas(id: string): Promise<Mesa> {
+    const request$ = await this.http.get(`${this.API_URL}/mesas/${id}?comandas=1`);
+    return await lastValueFrom(request$) as Mesa;
+  }
+
   async changeCantidad(total: number, id: number) {
     const request$ = await this.http.get(`${this.API_URL}/mesas/cantidad/${id}?cantidad=${total}`);
     await lastValueFrom(request$);

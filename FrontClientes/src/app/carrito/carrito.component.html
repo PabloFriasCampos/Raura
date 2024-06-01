@@ -1,3 +1,7 @@
+<div class="spinner-container" id="spinner" *ngIf="loading">
+  <div class="spinner"></div>
+</div>
+
 <div class="header">
   <button class="back-button" [routerLink]="'/mesa/' + mesa.id">BACK</button>
   <div>MESA {{mesa.id}}</div>
@@ -19,4 +23,5 @@
 
 <div class="botones">
   <button class="boton" (click)="mandarCocina()">MANDAR A COCINA</button>
+  <button class="boton" [routerLink]="'/comandas/' + this.id">VER COMANDAS</button>
 </div> 

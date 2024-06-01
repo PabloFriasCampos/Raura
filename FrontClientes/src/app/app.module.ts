@@ -10,13 +10,15 @@ import { AppComponent } from './app.component';
 import { ListaProductosComponent } from './lista-productos/lista-productos.component';
 import { DetallesProductoComponent } from './detalles-producto/detalles-producto.component';
 import { CarritoComponent } from './carrito/carrito.component';
+import { ComandasComponent } from './comandas/comandas.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListaProductosComponent,
     DetallesProductoComponent,
-    CarritoComponent
+    CarritoComponent,
+    ComandasComponent
   ],
   imports: [
     BrowserModule,
