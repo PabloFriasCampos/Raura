@@ -14,6 +14,7 @@ export class VistaMesaComponent implements OnInit {
   total: number = 0;
   mesa: Mesa = new Mesa;
   id: string = '';
+  loading: boolean = false;
 
   constructor(private api: APIService, private activatedRoute: ActivatedRoute, private toastr: ToastrService, private router: Router) { }
 
@@ -42,7 +43,9 @@ export class VistaMesaComponent implements OnInit {
       if (lista.length > 0) {
         this.toastr.error('No todos los pedidos se han servido')
       } else {
+        this.loading = true;
         await this.api.pedirCuenta(this.mesa);
+        this.loading = false;
         this.toastr.success('Cuenta creada');
         this.router.navigate(['/camarero'])
       }
