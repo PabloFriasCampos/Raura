@@ -65,7 +65,7 @@ export class APIService {
   }
 
   async getCuenta(id: string): Promise<Cuenta> {
-    const request$ = await this.http.get(`${this.API_URL}/cuenta/${id}`);
+    const request$ = await this.http.get(`http://localhost:3030/cuenta/${id}`);
     return await lastValueFrom(request$) as Cuenta;
   }
 

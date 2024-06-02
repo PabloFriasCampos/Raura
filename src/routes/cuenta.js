@@ -79,11 +79,14 @@ router.get('/:id', async (req, res) => {
     });
     cuenta = await Cuentas.findByPk(id);
 
+    const trabajador = await Trabajador.findByPk(cuenta.TrabajadorID);
+
     const cuentaConProductos = {
       id: id,
       Productos: [],
       TotalCuenta: cuenta.TotalCuenta,
-      FechaCuenta: cuenta.FechaCuenta
+      FechaCuenta: cuenta.FechaCuenta,
+      Trabajador: trabajador
     };
 
       for (const item of productosCuenta) {

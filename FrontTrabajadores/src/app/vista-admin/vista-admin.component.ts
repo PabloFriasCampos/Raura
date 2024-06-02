@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { APIService } from '../services/api.service';
 import { Cuenta } from '../models/cuenta';
 import { Router } from '@angular/router';
+import { Trabajador } from '../models/trabajador';
 
 @Component({
   selector: 'app-vista-admin',
@@ -34,7 +35,8 @@ export class VistaAdminComponent implements OnInit {
         id: cuenta.id,
         FechaCuenta: formattedDate,
         TotalCuenta: cuenta.TotalCuenta,
-        Productos: []
+        Productos: [],
+        Trabajador: new Trabajador
       }
     });
   }
