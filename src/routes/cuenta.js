@@ -8,20 +8,23 @@ const ListaProductosCuenta = require('../models/ListaProductosCuenta');
 const Trabajador = require('../models/Trabajador');
 const Productos = require('../models/Producto');
 
-router.post('/crear', Auth.verifyToken,  async (req,res) => {
-  try {
-    let productos = req.body.Productos
-    let nMesa = req.body.id
-    let correoTrabajador = req.user.Correo
+const PDFDocument = require('pdfkit');
+const fs = require('fs');
 
-    let trabajador = await Trabajador.findOne({where: { Correo: correoTrabajador }})
+router.post('/crear', Auth.verifyToken, async (req, res) => {
+  try {
+    let productos = req.body.Productos;
+    let nMesa = req.body.id;
+    let correoTrabajador = req.user.Correo;
+
+    let trabajador = await Trabajador.findOne({ where: { Correo: correoTrabajador } });
 
     let cuenta = await Cuentas.create({
-          NumeroMesa: nMesa,
-          FechaCuenta: Date.now(),
-          TotalCuenta: 0,
-          TrabajadorID: trabajador.id
-        });
+      NumeroMesa: nMesa,
+      FechaCuenta: Date.now(),
+      TotalCuenta: 0,
+      TrabajadorID: trabajador.id
+    });
 
     await cuenta.save();
 
@@ -51,13 +54,37 @@ router.post('/crear', Auth.verifyToken,  async (req,res) => {
     await cuenta.save();
 
     await ListaProductosMesa.destroy({
-      where: {MesaId: nMesa}
-    }) 
-    res.status(200).json({ message: 'ok'});
+      where: { MesaId: nMesa }
+    });
+
+    const doc = new PDFDocument();
+    const pdfPath = `src/cuentas/cuenta_${cuenta.id}.pdf`;
+
+    doc.pipe(fs.createWriteStream(pdfPath));
+
+    doc.fontSize(25).text('Cuenta Detalle', { align: 'center' });
+    doc.moveDown();
+    doc.fontSize(18).text(`Mesa: ${nMesa}`);
+    doc.text(`Fecha: ${new Date(cuenta.FechaCuenta).toLocaleString()}`);
+    doc.text(`Trabajador: ${trabajador.Rol}, ${trabajador.Nombre}`);
+
+    doc.moveDown();
+    doc.fontSize(16).text('Productos:');
+    
+    productos.forEach(producto => {
+      doc.text(`- ${producto.Producto.Nombre}: ${producto.Cantidad} x ${producto.Producto.Precio} = ${(producto.Cantidad * producto.Producto.Precio).toFixed(2)} €`);
+    });
+
+    doc.moveDown();
+    doc.fontSize(18).text(`Total Cuenta: ${(cuenta.TotalCuenta.toFixed(2))} €`, { align: 'right' });
+
+    doc.end();
+
+    res.status(200).json({ message: 'ok', pdfPath });
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
   }
-})
+});
 
 router.get('/', async (req,res) => {
   try {

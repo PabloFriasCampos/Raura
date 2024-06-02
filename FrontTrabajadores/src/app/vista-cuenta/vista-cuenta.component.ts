@@ -35,4 +35,8 @@ export class VistaCuentaComponent implements OnInit {
     this.cuenta.FechaCuenta = formattedDate;
   }
 
+  abrirPDF() {
+    this.api.abrirPDF(this.cuenta.id);
+  }
+
 }

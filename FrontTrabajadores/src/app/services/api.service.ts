@@ -65,7 +65,7 @@ export class APIService {
   }
 
   async getCuenta(id: string): Promise<Cuenta> {
-    const request$ = await this.http.get(`http://localhost:3030/cuenta/${id}`);
+    const request$ = await this.http.get(`${this.API_URL}/cuenta/${id}`);
     return await lastValueFrom(request$) as Cuenta;
   }
 
@@ -175,6 +175,11 @@ export class APIService {
 
   refrescar() {
     this.socketService.refrescar();
+  }
+
+  abrirPDF(cuentaId: string) {
+    const url = `${this.API_URL}/cuentas/cuenta_${cuentaId}.pdf`;
+    window.open(url, '_blank');
   }
 
 }
