@@ -7,3 +7,5 @@
   <p [routerLink]="'/producto/' + producto.Producto.id" class="nombre">{{producto.Cantidad}}x {{ producto.Producto.Nombre }}</p>
   <p>{{producto.Estado}}</p>
 </div>
+
+<div *ngIf="mesa.Productos.length == 0">No existen comandas</div>
