@@ -1,3 +1,4 @@
+// admin-productos.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Producto } from '../models/producto';
 import { APIService } from '../services/api.service';
@@ -13,6 +14,7 @@ export class AdminProductosComponent implements OnInit {
 
   productos: Producto[] = [];
   productosBackup: { [id: number]: Producto } = {};
+  selectedFiles: { [id: number]: File } = {};
 
   constructor(private api: APIService, private router: Router, private toastr: ToastrService) { }
 
@@ -35,14 +37,26 @@ export class AdminProductosComponent implements OnInit {
     const id = producto.id;
     this.productos = this.productos.map(p => p.id === id ? { ...this.productosBackup[id], editing: false } : p);
     delete this.productosBackup[id];
+    delete this.selectedFiles[id];
+  }
+
+  onFileSelected(event: any, producto: Producto) {
+    this.selectedFiles[producto.id] = event.target.files[0];
   }
 
   async saveProducto(producto: Producto) {
     producto.editing = false;
     let result = await this.api.updateProducto(producto);
-    if (result != null) this.toastr.success('Producto actualizado')
-    if (result == null) this.toastr.error('Error actualizando producto')
+    if (result != null) {
+      this.toastr.success('Producto actualizado');
+      if (this.selectedFiles[producto.id]) {
+        let uploadResult = await this.api.updateProductoImage(producto.id, this.selectedFiles[producto.id]);
+      }
+    } else {
+      this.toastr.error('Error actualizando producto');
+    }
     delete this.productosBackup[producto.id];
+    delete this.selectedFiles[producto.id];
   }
 
 }

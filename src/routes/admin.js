@@ -1,9 +1,23 @@
 const router = require('express').Router();
+const multer = require('multer');
 
 const Auth = require('../middleware/auth');
 
+const cors = require('cors');
+
 const Productos = require('../models/Producto');
 const Trabajadores = require('../models/Trabajador');
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'src/images');
+  },
+  filename: async (req, file, cb) => {
+    cb(null, file.originalname);
+  }
+});
+
+const upload = multer({ storage: storage });
 
 router.get('/productos', async (req,res) => {
   try {
@@ -87,19 +101,27 @@ router.post('/create/producto', Auth.verifyToken, Auth.verifyRole('ADMIN'), asyn
   try {
     const { Nombre, Categoria, RequiereCocina, Precio, Descripcion} = req.body;
 
-    await Productos.create({
+    const producto = await Productos.create({
       Nombre: Nombre,
       Categoria: Categoria, 
       RequiereCocina: RequiereCocina,
       Precio: Precio,
       Descripcion: Descripcion
     });
-  
-    res.status(200).json({ message: 'ok'});
+    res.status(200).json({ message: 'ok', productoId: producto.id });
   } catch (error) {
     console.log(error)
     return res.status(500).json({ message: "Internal server error" });
   }
 })
+
+router.post('/image', Auth.verifyToken, Auth.verifyRole('ADMIN'), upload.single('image'), (req, res) => {
+  try {
+    res.status(200).json({ message: "Correct Image Upload" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+});
 
 module.exports = router

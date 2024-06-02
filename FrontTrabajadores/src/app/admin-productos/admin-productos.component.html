@@ -12,6 +12,8 @@
   <p *ngIf="!producto.editing">{{ producto.Precio }} €</p>
   <input *ngIf="producto.editing" [(ngModel)]="producto.Precio" type="number" class="precio" />
 
+  <input type="file" *ngIf="producto.editing" (change)="onFileSelected($event, producto)" class="file-input" />
+
   <button *ngIf="producto.editing" class="guardar" (click)="saveProducto(producto)">Guardar</button>
   <button *ngIf="producto.editing" class="cancelar" (click)="cancelEdit(producto)">Cancelar</button>
   <button *ngIf="!producto.editing" class="editar" (click)="editProducto(producto)">Editar</button>

@@ -21,6 +21,10 @@
     <label for="descripcion">Descripción:</label>
     <textarea name="descripcion" class="descripcion" [(ngModel)]="producto.Descripcion"></textarea>
   </div>
+  <div class="form-field">
+    <label for="descripcion">Imagen:</label>
+    <input type="file" (change)="onFileSelected($event)" class="file" />
+  </div>
   <div class="form-actions">
     <button class="guardar" (click)="saveNewProducto()">Guardar</button>
   </div>

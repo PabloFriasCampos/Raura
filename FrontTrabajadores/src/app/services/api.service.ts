@@ -101,6 +101,18 @@ export class APIService {
     return null;
   }
 
+  async updateProductoImage(productId: number, file: File) {
+    let JWT = sessionStorage.getItem('JWT');
+    if (JWT) {
+      const optionsJWT = this.getRequestOptionsJWTImage(JWT);
+      const formData = new FormData();
+      formData.append('image', file, `${productId}.jpg`);
+      const request$ = this.http.post(`${this.API_URL}/admin/image`, formData, optionsJWT);
+      return await lastValueFrom(request$);
+    }
+    return null;
+  }
+
   async saveNewTrabajador(trabajador: Trabajador) {
     let JWT = sessionStorage.getItem('JWT')
     if (JWT) {
@@ -116,7 +128,7 @@ export class APIService {
     if (JWT) {
       const optionsJWT = this.getRequestOptionsJWT(JWT);
       const request$ = await this.http.post(`${this.API_URL}/admin/create/producto`, JSON.stringify(producto), optionsJWT)
-      return await lastValueFrom(request$);
+      return await lastValueFrom(request$) as any;
     }
     return null;
   }
@@ -137,6 +149,15 @@ export class APIService {
     return {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${JWT}`
+      }),
+      responseType: 'text'
+    };
+  }
+
+  private getRequestOptionsJWTImage(JWT: string): any {
+    return {
+      headers: new HttpHeaders({
         'Authorization': `Bearer ${JWT}`
       }),
       responseType: 'text'

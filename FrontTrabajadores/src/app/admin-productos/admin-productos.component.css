@@ -113,3 +113,16 @@ button.cancelar:focus {
   justify-content: center;
   margin: 20px 80px;
 }
+
+.file-input {
+  margin-left: 10px;
+  border: 1px solid #70eb95;
+  border-radius: 5px;
+  padding: 5px;
+  transition: border-color 0.3s ease;
+}
+
+.file-input:focus {
+  border-color: #56c876;
+  outline: none;
+}
