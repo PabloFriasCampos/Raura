@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { APIService } from '../services/api.service';
 import { Producto } from '../models/producto';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '../services/translate.service';
 
 @Component({
   selector: 'app-detalles-producto',
@@ -17,7 +18,7 @@ export class DetallesProductoComponent implements OnInit {
   id = sessionStorage.getItem('id') || '0';
   loading: boolean = false;
 
-  constructor(private api: APIService, private activatedRoute: ActivatedRoute, private toastr: ToastrService, private router: Router) { }
+  constructor(private api: APIService, private activatedRoute: ActivatedRoute, private toastr: ToastrService, private router: Router, private translate: TranslateService) { }
 
   async ngOnInit(): Promise<void> {
     const id = await this.activatedRoute.snapshot.paramMap.get('id');
@@ -32,11 +33,11 @@ export class DetallesProductoComponent implements OnInit {
       this.loading = true;
       await this.api.addToMesa(this.producto, this.cantidad, this.id);
       this.loading = false;
-      this.toastr.info('Añadido a la cesta')
+      this.toastr.info(this.translate.getTranslation('addToCart'))
       this.router.navigate(['/mesa/' + this.id])
     } catch (error) {
       this.loading = false;
-      this.toastr.error('No se pudo añadir a la cesta')
+      this.toastr.error(this.translate.getTranslation('notAddToCart'))
       console.log(error)
     }
   }

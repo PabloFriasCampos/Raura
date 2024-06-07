@@ -4,6 +4,7 @@ import { ProductosXCategoria } from '../models/productos-xcategoria';
 import { Producto } from '../models/producto';
 import { ActivatedRoute, Router } from '@angular/router';
 import Sqids from 'sqids';
+import { TranslateService } from '../services/translate.service';
 
 @Component({
   selector: 'app-lista-productos',
@@ -17,9 +18,10 @@ export class ListaProductosComponent implements OnInit {
   inicio: boolean = true;
   id: string = '';
   showId: string = '';
-  sqids: Sqids = new Sqids()
+  sqids: Sqids = new Sqids();
+  dropdownOpen: boolean = false;
 
-  constructor(private api: APIService, private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(private api: APIService, private activatedRoute: ActivatedRoute, private router: Router, private translation: TranslateService) { }
 
   async ngOnInit(): Promise<void> {
     this.id = await this.activatedRoute.snapshot.paramMap.get('id') || '';
@@ -40,6 +42,20 @@ export class ListaProductosComponent implements OnInit {
       this.productosMostrados = categoriaEncontrada.Productos;
     }
 
+  }
+
+
+  switchLanguage(lang: string) {
+    if (this.translation.getLanguage() != lang) {
+      this.translation.switchLanguage(lang);
+      localStorage.setItem('language', lang);
+      window.location.reload();
+    }
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  toggleDropdown() {
+    this.dropdownOpen = !this.dropdownOpen;
   }
 
 }

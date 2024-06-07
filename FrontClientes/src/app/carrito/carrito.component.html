@@ -3,8 +3,8 @@
 </div>
 
 <div class="header">
-  <button class="back-button" [routerLink]="'/mesa/' + mesa.id">BACK</button>
-  <div>MESA {{mesa.id}}</div>
+  <button class="back-button" [routerLink]="'/mesa/' + mesa.id">{{'back' | translate}}</button>
+  <div>{{'mesa' | translate}} {{mesa.id}}</div>
 </div>
 
 <div *ngFor="let producto of mesa.Productos" class="products">
@@ -17,11 +17,11 @@
   <p class="precio">{{ (producto.Producto.Precio  * producto.Cantidad).toFixed(2)}} €</p>
 </div>
 <div class="total">
-  <p>TOTAL : </p>
+  <p>{{'total' | translate}} : </p>
   <p>{{this.total.toFixed(2)}} €</p>
 </div>
 
 <div class="botones">
-  <button class="boton" (click)="mandarCocina()">MANDAR A COCINA</button>
-  <button class="boton" [routerLink]="'/comandas/' + this.id">VER COMANDAS</button>
+  <button class="boton" (click)="mandarCocina()">{{'sendCocina' | translate}}</button>
+  <button class="boton" [routerLink]="'/comandas/' + this.id">{{'seeOrders' | translate}}</button>
 </div> 

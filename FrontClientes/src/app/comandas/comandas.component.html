@@ -1,6 +1,6 @@
 <div class="header">
-  <button class="back-button" [routerLink]="'/mesa/' + mesa.id">BACK</button>
-  <div>MESA {{mesa.id}}</div>
+  <button class="back-button" [routerLink]="'/mesa/' + mesa.id">{{'back' | translate}}</button>
+  <div>{{'mesa' | translate}} {{mesa.id}}</div>
 </div>
 
 <div *ngFor="let producto of mesa.Productos" class="products">
@@ -8,4 +8,4 @@
   <p>{{producto.Estado}}</p>
 </div>
 
-<div *ngIf="mesa.Productos.length == 0">No existen comandas</div>
+<div *ngIf="mesa.Productos.length == 0">{{'noComandas' | translate}}</div>

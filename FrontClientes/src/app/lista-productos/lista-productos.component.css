@@ -15,6 +15,57 @@
   filter: saturate(3);
 }
 
+.dropdown {
+  position: relative;
+}
+
+.btn-secondary {
+  padding: 10px;
+  border-radius: 5px;
+  font-family: 'Ginerin';
+  background-color: #70eb95;
+  border-color: #70eb95;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: #34c961;
+  border-color: #34c961;
+}
+
+.dropdown-menu {
+  position: absolute;
+  display: none;
+  color: #212529;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border-radius: 0.25rem;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 0.25rem 1.5rem;
+  clear: both;
+  font-weight: 400;
+  color: #212529;
+  text-align: inherit;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f1f1;
+}
+
 .tab-container {
   white-space: nowrap;
   overflow-x: auto;

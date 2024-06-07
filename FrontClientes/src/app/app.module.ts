@@ -11,6 +11,7 @@ import { ListaProductosComponent } from './lista-productos/lista-productos.compo
 import { DetallesProductoComponent } from './detalles-producto/detalles-producto.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { ComandasComponent } from './comandas/comandas.component';
+import { TranslatePipe } from './pipes/translate.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ComandasComponent } from './comandas/comandas.component';
     ListaProductosComponent,
     DetallesProductoComponent,
     CarritoComponent,
-    ComandasComponent
+    ComandasComponent,
+    TranslatePipe
   ],
   imports: [
     BrowserModule,

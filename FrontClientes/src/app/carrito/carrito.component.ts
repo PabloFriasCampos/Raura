@@ -4,6 +4,7 @@ import { Mesa } from '../models/mesa';
 import { ActivatedRoute } from '@angular/router';
 import { ListaProductos } from '../models/lista-productos';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '../services/translate.service';
 
 @Component({
   selector: 'app-carrito',
@@ -17,7 +18,7 @@ export class CarritoComponent {
   loading: boolean = false;
   id: string = '';
 
-  constructor(private api: APIService, private activatedRoute: ActivatedRoute, private toastr: ToastrService) { }
+  constructor(private api: APIService, private activatedRoute: ActivatedRoute, private toastr: ToastrService, private translate: TranslateService) { }
 
   async ngOnInit(): Promise<void> {
     this.id = await this.activatedRoute.snapshot.paramMap.get('id') || '';
@@ -43,19 +44,19 @@ export class CarritoComponent {
 
   async mandarCocina() {
     if (this.mesa.Productos.length == 0) {
-      this.toastr.warning('No hay nada que mandar')
+      this.toastr.warning(this.translate.getTranslation('emptyToSend'))
     } else {
       try {
         this.loading = true;
         await this.api.mandarCocina(this.mesa.Productos);
         this.loading = false;
-        this.toastr.success('Mandado a cocina')
+        this.toastr.success(this.translate.getTranslation('sent'))
         this.mesa.Productos = [];
         this.total = 0;
       } catch (error) {
         this.loading = false;
         console.log(error)
-        this.toastr.error('Se ha producido un error')
+        this.toastr.error(this.translate.getTranslation('error'))
       }
     }
   }

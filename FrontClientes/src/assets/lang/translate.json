@@ -1,0 +1,34 @@
+{
+  "en": {
+    "noComandas": "No orders",
+    "mesa": "Table",
+    "idioma": "Language",
+    "back": "Back",
+    "total": "Total",
+    "add": "Add",
+    "description": "Description",
+    "sendCocina": "Send to Kitchen",
+    "seeOrders": "See orders",
+    "emptyToSend": "Nothing to send",
+    "sent": "Sent to Kitchen",
+    "error": "An error happened",
+    "addToCart": "Added to Cart",
+    "notAddToCart": "Couldn't add to Cart"
+  },
+  "es": {
+    "noComandas": "No hay comandas",
+    "mesa": "Mesa",
+    "idioma": "Idioma",
+    "back": "Atrás",
+    "total": "Total",
+    "add": "Añadir",
+    "description": "Descripción",
+    "sendCocina": "Mandar a cocina",
+    "seeOrders": "Ver comandas",
+    "emptyToSend": "No hay nada que mandar",
+    "sent": "Mandado a cocina",
+    "error": "Se ha producido un error",
+    "addToCart": "Añadido a la cesta",
+    "notAddToCart": "No se pudo añadir a la cesta"
+  }
+}

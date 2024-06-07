@@ -1,7 +1,17 @@
 <div class="header">
-  <div>MESA {{showId}}</div>
-  <img src="assets/carrito.png" class="carritoimg" [routerLink]="'/carrito/' + this.id">
+  <div>{{ 'mesa' | translate }} {{ showId }}</div>
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" (click)="toggleDropdown()">
+      {{ 'idioma' | translate }}
+    </button>
+    <div class="dropdown-menu" [class.show]="dropdownOpen" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="#" (click)="switchLanguage('en')">English</a>
+      <a class="dropdown-item" href="#" (click)="switchLanguage('es')">Español</a>
+    </div>
+  </div>
+  <img src="assets/carrito.png" class="carritoimg" [routerLink]="'/carrito/' + id">
 </div>
+
 
 <div class="tab-container">
   <ng-container *ngFor="let categoria of productosXCategoria">
