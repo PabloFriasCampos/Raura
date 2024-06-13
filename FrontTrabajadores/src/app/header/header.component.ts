@@ -10,12 +10,20 @@ import { APIService } from '../services/api.service';
 export class HeaderComponent implements OnInit {
 
   isAdmin: boolean = false;
+  isCamarero: boolean = false;
+  isCocinero: boolean = false;
 
   constructor(private router: Router, private api: APIService) { }
 
   ngOnInit() {
     let rol = this.api.getRoleFromToken();
-    this.isAdmin = (rol === 'ADMIN');
+    if (rol === 'ADMIN') {
+      this.isAdmin = true;
+      this.isCocinero = true;
+      this.isCamarero = true;
+    }
+    this.isCamarero = (rol === 'CAMARERO');
+    this.isCocinero = (rol === 'COCINERO');
   }
 
   logout() {
