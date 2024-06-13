@@ -17,13 +17,13 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     let rol = this.api.getRoleFromToken();
+    this.isCamarero = (rol === 'CAMARERO');
+    this.isCocinero = (rol === 'COCINERO');
     if (rol === 'ADMIN') {
       this.isAdmin = true;
       this.isCocinero = true;
       this.isCamarero = true;
     }
-    this.isCamarero = (rol === 'CAMARERO');
-    this.isCocinero = (rol === 'COCINERO');
   }
 
   logout() {
